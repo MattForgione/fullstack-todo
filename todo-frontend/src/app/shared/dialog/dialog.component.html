@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<div mat-dialog-content *ngIf="data.content">
+  {{ data.content }}
+</div>
+<ng-template [cdkPortalOutlet]="portal"></ng-template>
+<div mat-dialog-actions *ngIf="standalone">
+  <button (click)="onNoClick()" mat-button>Ok!</button>
+</div>
