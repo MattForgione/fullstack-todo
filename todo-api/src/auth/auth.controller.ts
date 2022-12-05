@@ -11,6 +11,10 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LoginAuthGuard } from './guards/login-auth.guard';
 
+interface VerifyEmailToken {
+  token: string;
+}
+
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -30,5 +34,10 @@ export class AuthController {
   @Get('user')
   async getProfile(@Request() req) {
     return req.user;
+  }
+
+  @Post('verify-email')
+  async verifyEmail(@Body() body: VerifyEmailToken) {
+    return this.authService.verifyEmail(body.token);
   }
 }

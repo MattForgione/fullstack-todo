@@ -1,7 +1,12 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { comparePasswords } from './utils/bcrypt';
+import { DecodedEmailJwt } from '../interfaces';
 
 @Injectable()
 export class AuthService {
@@ -40,5 +45,17 @@ export class AuthService {
     return {
       access_token: this.jwtService.sign(payload),
     };
+  }
+
+  verifyEmail(token: string) {
+    try {
+      this.jwtService.verify(token);
+    } catch {
+      throw new UnauthorizedException('Token signature is invalid or expired');
+    }
+
+    const jwt = this.jwtService.decode(token) as DecodedEmailJwt;
+
+    return this.usersService.verifyEmail(jwt);
   }
 }

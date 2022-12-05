@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
 import { encodePassword } from '../auth/utils/bcrypt';
+import { DecodedEmailJwt } from '../interfaces';
 
 @Injectable()
 export class UsersService {
@@ -23,6 +24,14 @@ export class UsersService {
   async create(email: string, password: string) {
     const encodedPassword = encodePassword(password);
     const user = this.repo.create({ email, password: encodedPassword });
+
+    return this.repo.save(user);
+  }
+
+  async verifyEmail(jwt: DecodedEmailJwt) {
+    const user = await this.repo.findOneBy({ email: jwt.email });
+    if (!user) throw new NotFoundException('Email not found');
+    user.emailVerified = true;
 
     return this.repo.save(user);
   }
