@@ -65,4 +65,15 @@ export class AuthService {
 
     await this.mailerService.sendPasswordResetEmail(email);
   }
+
+  async submitResetPasswordForm(token: string, body: { password: string }) {
+    await this.jwtService.verifyAsync(token).catch(err => {
+      throw new UnauthorizedException(
+        `This email reset link is expired: ${err}`
+      );
+    });
+    const { email } = this.jwtService.decode(token) as DecodedEmailJwt;
+
+    return this.usersService.changeUserPassword(email, body.password);
+  }
 }

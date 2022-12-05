@@ -5,6 +5,8 @@ import {
   UseGuards,
   Body,
   Get,
+  Patch,
+  Param,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -17,6 +19,10 @@ interface VerifyEmailToken {
 
 interface ResetPasswordEmail {
   email: string;
+}
+
+interface ResetPasswordFormSubmission {
+  password: string;
 }
 
 @Controller('auth')
@@ -48,5 +54,13 @@ export class AuthController {
   @Post('password-reset')
   async resetPasswordEmail(@Body() body: ResetPasswordEmail) {
     return await this.authService.sendResetPasswordEmail(body.email);
+  }
+
+  @Patch('password-reset-form/:token')
+  async passwordResetFormSubmission(
+    @Param('token') token: string,
+    @Body() body: ResetPasswordFormSubmission
+  ) {
+    return this.authService.submitResetPasswordForm(token, body);
   }
 }
