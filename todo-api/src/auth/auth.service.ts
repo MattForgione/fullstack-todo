@@ -7,12 +7,14 @@ import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { comparePasswords } from './utils/bcrypt';
 import { DecodedEmailJwt } from '../interfaces';
+import { MailerService } from './mailer.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private usersService: UsersService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private mailerService: MailerService
   ) {}
 
   async validateUser(email: string, password: string) {
@@ -37,14 +39,11 @@ export class AuthService {
 
   async signup(email: string, password: string) {
     const users = await this.usersService.find(email);
-    if (users.length) throw new BadRequestException('Username in use');
+    if (users.length) throw new BadRequestException('Email in use');
 
-    const user = await this.usersService.create(email, password);
-    const payload = { email: user.email, sub: user.id };
+    await this.mailerService.sendVerificationEmail(email);
 
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+    return this.usersService.create(email, password);
   }
 
   verifyEmail(token: string) {
