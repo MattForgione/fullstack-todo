@@ -57,4 +57,12 @@ export class AuthService {
 
     return this.usersService.verifyEmail(jwt);
   }
+
+  async sendResetPasswordEmail(email: string) {
+    const users = await this.usersService.find(email);
+    if (!users.length)
+      throw new BadRequestException('This email account does not exist');
+
+    await this.mailerService.sendPasswordResetEmail(email);
+  }
 }

@@ -8,14 +8,12 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LoginStrategy } from './strategies/login.strategy';
 import { MailerService } from './mailer.service';
-import { LocalConfigModule } from '../local-config/local-config.module';
 import { LocalConfigService } from '../local-config/local-config.service';
 
 @Module({
   imports: [
     UsersModule,
     PassportModule,
-    LocalConfigModule,
     JwtModule.registerAsync({
       inject: [LocalConfigService],
       useFactory: (localConfig: LocalConfigService) => ({
@@ -32,5 +30,6 @@ import { LocalConfigService } from '../local-config/local-config.service';
     LoginStrategy,
     MailerService,
   ],
+  exports: [AuthService, MailerService],
 })
 export class AuthModule {}

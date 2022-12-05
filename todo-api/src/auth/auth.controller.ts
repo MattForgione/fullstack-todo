@@ -15,6 +15,10 @@ interface VerifyEmailToken {
   token: string;
 }
 
+interface ResetPasswordEmail {
+  email: string;
+}
+
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -39,5 +43,10 @@ export class AuthController {
   @Post('verify-email')
   async verifyEmail(@Body() body: VerifyEmailToken) {
     return this.authService.verifyEmail(body.token);
+  }
+
+  @Post('password-reset')
+  async resetPasswordEmail(@Body() body: ResetPasswordEmail) {
+    return await this.authService.sendResetPasswordEmail(body.email);
   }
 }

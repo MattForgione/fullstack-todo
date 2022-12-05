@@ -38,4 +38,20 @@ export class MailerService {
       throw new BadRequestException(`Something went wrong: ${err}`);
     }
   }
+
+  async sendPasswordResetEmail(email: string) {
+    const payload = { email };
+    const token = await this.jwtService.signAsync(payload);
+
+    try {
+      await this._transporter.sendMail({
+        from: this._fromLineString,
+        to: email,
+        subject: 'Password reset',
+        html: `<a href="${this.localConfig.clientUrl()}/auth/password-reset-form/${token}">Click here to reset password!!</a>`,
+      });
+    } catch (err) {
+      throw new BadRequestException(`Something went wrong: ${err}`);
+    }
+  }
 }
