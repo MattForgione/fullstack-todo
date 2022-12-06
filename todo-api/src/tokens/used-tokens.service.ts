@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsedToken } from './used-token.entity';
 import { Repository } from 'typeorm';
@@ -9,11 +9,13 @@ export class UsedTokensService {
     @InjectRepository(UsedToken) private repo: Repository<UsedToken>
   ) {}
 
-  async findOne(token: string) {
-    const tokenResult = this.repo.findOneBy({ token });
-    if (!tokenResult) throw new NotFoundException(`Token does not exist`);
+  async checkIfTokenExists(token: string) {
+    const tokenResult = await this.repo.findOneBy({ token });
+    console.log('token result: ' + token);
+    console.log('repo result: ' + tokenResult);
 
-    return token;
+    if (!tokenResult) return { tokenExists: false };
+    return { tokenExists: true };
   }
 
   async addToken(token: string) {

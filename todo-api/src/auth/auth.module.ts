@@ -9,10 +9,12 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 import { LoginStrategy } from './strategies/login.strategy';
 import { MailerService } from './mailer.service';
 import { LocalConfigService } from '../local-config/local-config.service';
+import { UsedTokensModule } from '../tokens/used-tokens.module';
 
 @Module({
   imports: [
     UsersModule,
+    UsedTokensModule,
     PassportModule,
     JwtModule.registerAsync({
       inject: [LocalConfigService],
