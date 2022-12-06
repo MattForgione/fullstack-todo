@@ -1,7 +1,12 @@
 <nav [tabPanel]="tabPanel" backgroundColor="accent" mat-tab-nav-bar>
-  <a mat-tab-link routerLink="/">Home</a>
-  <a mat-tab-link routerLink="/auth/login">Login</a>
-  <a mat-tab-link routerLink="/auth/logout">Logout</a>
+  <div *ngIf="signedIn; else notSignedIn">
+    <a mat-tab-link routerLink="/">Home</a>
+    <a mat-tab-link routerLink="/auth/logout">Logout</a>
+  </div>
+  <ng-template #notSignedIn>
+    <a mat-tab-link routerLink="/auth/login">Login</a>
+    <a mat-tab-link routerLink="/auth/signup">Signup</a>
+  </ng-template>
 </nav>
 
 <mat-tab-nav-panel #tabPanel>
