@@ -66,4 +66,16 @@ export class AuthService {
   verifyEmail(token: string | null) {
     return this.http.post(`${this.url}/auth/verify-email`, { token });
   }
+
+  sendPasswordResetEmail(email: string) {
+    return this.http.post(`${this.url}/auth/password-reset`, {
+      email,
+    });
+  }
+
+  submitResetPasswordForm(password: string, token: string) {
+    return this.http.patch(`${this.url}/auth/reset-password-form/${token}`, {
+      password,
+    });
+  }
 }

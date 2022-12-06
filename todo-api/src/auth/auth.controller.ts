@@ -63,7 +63,7 @@ export class AuthController {
     return await this.authService.sendResetPasswordEmail(body.email);
   }
 
-  @Patch('password-reset-form/:token')
+  @Patch('reset-password-form/:token')
   @HttpCode(HttpStatus.OK)
   async passwordResetFormSubmission(
     @Param('token') token: string,

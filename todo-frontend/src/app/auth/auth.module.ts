@@ -6,6 +6,8 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LogoutComponent } from './logout/logout.component';
 import { SignupComponent } from './signup/signup.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ResetPasswordFormComponent } from './reset-password-form/reset-password-form.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +15,8 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     LogoutComponent,
     SignupComponent,
     VerifyEmailComponent,
+    ResetPasswordComponent,
+    ResetPasswordFormComponent,
   ],
   imports: [CommonModule, SharedModule, AuthRoutingModule],
 })

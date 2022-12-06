@@ -48,7 +48,7 @@ export class MailerService {
         from: this._fromLineString,
         to: email,
         subject: 'Password reset',
-        html: `<a href="${this.localConfig.clientUrl()}/auth/password-reset-form/${token}">Click here to reset password!!</a>`,
+        html: `<a href="${this.localConfig.clientUrl()}/auth/reset-password-form/${token}">Click here to reset password!!</a>`,
       });
     } catch (err) {
       throw new BadRequestException(`Something went wrong: ${err}`);
