@@ -1,2 +1,17 @@
 <h1>Hello, World!</h1>
+<app-form
+  (submitEvent)="onSubmit()"
+  [form]="loginForm"
+  [login]="true"
+  buttonText="Login!"
+  title="Login">
+  <app-input
+    [control]="$any(loginForm.get('email'))"
+    labelText="Email"
+    placeholder="example@example.com"></app-input>
+  <app-input
+    [control]="$any(loginForm.get('password'))"
+    inputType="password"
+    labelText="Password"></app-input>
+</app-form>
 <router-outlet></router-outlet>
