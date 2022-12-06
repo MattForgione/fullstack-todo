@@ -14,6 +14,7 @@ import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LoginAuthGuard } from './guards/login-auth.guard';
+import { PasswordResetDto } from './dto/password-reset.dto';
 
 interface VerifyEmailToken {
   token: string;
@@ -21,10 +22,6 @@ interface VerifyEmailToken {
 
 interface ResetPasswordEmail {
   email: string;
-}
-
-interface ResetPasswordFormSubmission {
-  password: string;
 }
 
 @Controller('auth')
@@ -67,7 +64,7 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   async passwordResetFormSubmission(
     @Param('token') token: string,
-    @Body() body: ResetPasswordFormSubmission
+    @Body() body: PasswordResetDto
   ) {
     return this.authService.submitResetPasswordForm(token, body);
   }

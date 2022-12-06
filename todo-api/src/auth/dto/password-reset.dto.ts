@@ -1,9 +1,6 @@
-import { IsString, Matches } from 'class-validator';
+import { Matches } from 'class-validator';
 
-export class CreateUserDto {
-  @IsString()
-  email: string;
-
+export class PasswordResetDto {
   @Matches(
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/,
     {
