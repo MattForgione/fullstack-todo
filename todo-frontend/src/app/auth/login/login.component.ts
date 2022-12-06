@@ -27,14 +27,15 @@ export class LoginComponent {
 
   onSubmit() {
     const { email, password } = this.loginForm.value as FormLoginData;
-    this.authService.login(email, password).subscribe({
+    return this.authService.login(email, password).subscribe({
       next: token => {
         console.log(token);
         return this.router.navigateByUrl('/');
       },
       error: ({ error }) => {
         if (error) {
-          this.loginForm.setErrors({ responseError: error.messages });
+          console.log(error);
+          this.loginForm.setErrors({ responseError: error.message });
         }
       },
     });

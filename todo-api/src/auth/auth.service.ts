@@ -1,6 +1,8 @@
 import {
   BadRequestException,
+  ForbiddenException,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
@@ -20,13 +22,17 @@ export class AuthService {
   async validateUser(email: string, password: string) {
     const user = await this.usersService.findOne(email);
     if (user) {
-      const matched = comparePasswords(password, user.password);
-      if (matched) {
-        const { ...result } = user;
-        return result;
+      if (user.emailVerified) {
+        const matched = comparePasswords(password, user.password);
+        if (matched) {
+          const { ...result } = user;
+          return result;
+        }
+        throw new ForbiddenException('Bad Password');
       }
+      throw new ForbiddenException('Email is not verified');
     }
-    return null;
+    throw new NotFoundException('Email does not exist');
   }
 
   async login(user: any) {
