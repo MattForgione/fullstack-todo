@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/user.entity';
 import { LocalConfigModule } from './local-config/local-config.module';
 import { APP_PIPE } from '@nestjs/core';
+import { UsedTokensModule } from './tokens/used-tokens.module';
+import { UsedToken } from './tokens/used-token.entity';
 
 @Module({
   imports: [
@@ -15,10 +17,11 @@ import { APP_PIPE } from '@nestjs/core';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'db.sqlite',
-      entities: [User],
+      entities: [User, UsedToken],
       synchronize: true,
     }),
     LocalConfigModule,
+    UsedTokensModule,
   ],
   controllers: [AppController],
   providers: [
