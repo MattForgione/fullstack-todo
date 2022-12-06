@@ -16,6 +16,7 @@ export class AppComponent {
       .pipe(
         filter(e => e instanceof Scroll),
         mergeMap(() => {
+          this.authService.checkAuthentication();
           return this.authService.signedIn$;
         })
       )

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 interface FormLoginData {
   email: string;
@@ -22,22 +23,19 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) {}
 
   onSubmit() {
     const { email, password } = this.loginForm.value as FormLoginData;
     return this.authService.login(email, password).subscribe({
-      next: token => {
-        this.authService.signedIn$.subscribe(val => {
-          console.log(val);
-        });
-        console.log(token);
+      next: tokenResponse => {
+        this.cookieService.set('authToken', tokenResponse.access_token);
         return this.router.navigateByUrl('/');
       },
       error: ({ error }) => {
         if (error) {
-          console.log(error);
           this.loginForm.setErrors({ responseError: error.message });
         }
       },
