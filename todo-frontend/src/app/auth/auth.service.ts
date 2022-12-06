@@ -62,4 +62,8 @@ export class AuthService {
       password,
     });
   }
+
+  verifyEmail(token: string | null) {
+    return this.http.post(`${this.url}/auth/verify-email`, { token });
+  }
 }
