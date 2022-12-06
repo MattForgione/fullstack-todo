@@ -55,4 +55,11 @@ export class AuthService {
 
     this.signedIn$ = of(false);
   }
+
+  signup(email: string, password: string) {
+    return this.http.post(`${this.url}/auth/signup`, {
+      email,
+      password,
+    });
+  }
 }

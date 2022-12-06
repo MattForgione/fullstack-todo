@@ -1,0 +1,22 @@
+<div class="form-page-container">
+  <app-form
+    (submitEvent)="onSubmit()"
+    [form]="signupForm"
+    [buttonDisabled]="buttonDisabled"
+    autocomplete="off"
+    buttonText="Sign Up!"
+    title="Sign Up">
+    <app-input
+      [control]="$any(signupForm.get('email'))"
+      labelText="Email"
+      placeholder="example@example.com"></app-input>
+    <app-input
+      [control]="$any(signupForm.get('password'))"
+      inputType="password"
+      labelText="Password"></app-input>
+    <app-input
+      [control]="$any(signupForm.get('passwordConfirm'))"
+      inputType="password"
+      labelText="Password Confirm"></app-input>
+  </app-form>
+</div>
