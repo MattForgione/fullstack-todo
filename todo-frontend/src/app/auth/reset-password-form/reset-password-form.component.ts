@@ -4,7 +4,7 @@ import { MatchPassword } from '../../shared/validators/match-password';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { CookieService } from 'ngx-cookie-service';
-import { finalize, map, mergeMap, tap } from 'rxjs';
+import { map, mergeMap, tap } from 'rxjs';
 import jwt_decode from 'jwt-decode';
 import { DecodedJwtToken } from '../../../interfaces';
 
@@ -49,7 +49,11 @@ export class ResetPasswordFormComponent implements OnInit {
           if (this.tokenExists) {
             return this.router.navigateByUrl('/auth/link-has-expired');
           }
-          return;
+          return this.authService.storeUsedToken(this.token).subscribe({
+            error: ({ error }) => {
+              console.log(error);
+            },
+          });
         })
       )
       .subscribe();
@@ -69,13 +73,6 @@ export class ResetPasswordFormComponent implements OnInit {
               return this.authService.logout();
             })
           );
-        }),
-        finalize(() => {
-          this.authService.storeUsedToken(this.token).subscribe({
-            error: ({ error }) => {
-              console.log(error);
-            },
-          });
         })
       )
       .subscribe({
