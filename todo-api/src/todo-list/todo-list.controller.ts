@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { TodoListService } from './todo-list.service';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 
@@ -17,6 +25,11 @@ export class TodoListController {
     const { email } = body;
 
     return this.todoListService.getTodoLists(email);
+  }
+
+  @Delete(':todoListId')
+  async deleteTodoList(@Param('todoListId') todoListId: string) {
+    return this.todoListService.deleteTodoList(parseInt(todoListId));
   }
 
   @Post(':todoListId')
@@ -49,5 +62,10 @@ export class TodoListController {
   ) {
     const { title, content } = body;
     return this.todoListService.updateTodo(title, content, parseInt(todoId));
+  }
+
+  @Delete('todo/:todoId')
+  async deleteTodo(@Param('todoId') todoId: string) {
+    return this.todoListService.deleteTodo(parseInt(todoId));
   }
 }

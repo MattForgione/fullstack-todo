@@ -28,6 +28,19 @@ export class TodoListService {
     return this.todoListRepository.find({ where: { user } });
   }
 
+  async deleteTodoList(todoListId: number) {
+    const todoList = await this.todoListRepository.findOneBy({
+      id: todoListId,
+    });
+
+    if (!todoListId)
+      throw new NotFoundException(
+        `Todo list with id ${todoListId} was not found`
+      );
+
+    return this.todoListRepository.remove(todoList);
+  }
+
   async createTodo(title: string, content: string, todoListId: number) {
     const todoList = await this.todoListRepository.findOne({
       where: { id: todoListId },
@@ -64,5 +77,14 @@ export class TodoListService {
     todo.content = content;
 
     return this.todoRepository.save(todo);
+  }
+
+  async deleteTodo(todoId: number) {
+    const todo = await this.todoRepository.findOneBy({ id: todoId });
+
+    if (!todo)
+      throw new NotFoundException(`Todo with id ${todoId} was not found`);
+
+    return this.todoRepository.remove(todo);
   }
 }
