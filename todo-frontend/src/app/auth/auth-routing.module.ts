@@ -6,6 +6,7 @@ import { SignupComponent } from './signup/signup.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ResetPasswordFormComponent } from './reset-password-form/reset-password-form.component';
+import { LinkExpiredComponent } from './link-expired/link-expired.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'reset-password-form/:token',
     component: ResetPasswordFormComponent,
+  },
+  {
+    path: 'link-has-expired',
+    component: LinkExpiredComponent,
   },
 ];
 

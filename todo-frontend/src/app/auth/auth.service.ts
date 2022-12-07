@@ -10,6 +10,15 @@ interface AccessTokenResponse {
   access_token: string;
 }
 
+interface TokenExistsResponse {
+  tokenExists: boolean;
+}
+
+interface AddTokenResponse {
+  token: string;
+  id: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -77,5 +86,20 @@ export class AuthService {
     return this.http.patch(`${this.url}/auth/reset-password-form/${token}`, {
       password,
     });
+  }
+
+  checkTokenExists(token: string) {
+    return this.http.get<TokenExistsResponse>(
+      `${this.url}/auth/check-used-token-exists?token=${token}`
+    );
+  }
+
+  storeUsedToken(token: string) {
+    return this.http.post<AddTokenResponse>(
+      `${this.url}/auth/store-used-token`,
+      {
+        token,
+      }
+    );
   }
 }

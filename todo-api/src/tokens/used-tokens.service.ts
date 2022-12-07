@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsedToken } from './used-token.entity';
 import { Repository } from 'typeorm';
@@ -19,6 +19,9 @@ export class UsedTokensService {
   }
 
   async addToken(token: string) {
+    const tokenExists = await this.repo.findOneBy({ token });
+    if (tokenExists) throw new BadRequestException('Token already exists');
+
     const newToken = this.repo.create({ token });
 
     return this.repo.save(newToken);
