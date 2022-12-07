@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { TodoListService } from './todo-list.service';
+import { UpdateTodoDto } from './dto/update-todo.dto';
 
 @Controller('todo-list')
 export class TodoListController {
@@ -18,7 +19,7 @@ export class TodoListController {
     return this.todoListService.getTodoLists(email);
   }
 
-  @Post(':todoListId/todo')
+  @Post(':todoListId')
   async createTodo(
     @Body() body: { title: string; content: string },
     @Param('todoListId') todoListId: string
@@ -34,5 +35,19 @@ export class TodoListController {
   @Get(':todoListId')
   async getTodos(@Param('todoListId') todoListId: string) {
     return this.todoListService.getTodos(parseInt(todoListId));
+  }
+
+  @Get('todo/:todoId')
+  async getTodo(@Param('todoId') todoId: string) {
+    return this.todoListService.getOneTodo(parseInt(todoId));
+  }
+
+  @Patch('todo/:todoId')
+  async updateTodo(
+    @Param('todoId') todoId: string,
+    @Body() body: UpdateTodoDto
+  ) {
+    const { title, content } = body;
+    return this.todoListService.updateTodo(title, content, parseInt(todoId));
   }
 }

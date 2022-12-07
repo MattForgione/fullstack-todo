@@ -49,4 +49,20 @@ export class TodoListService {
       where: { todoList: { id: todoListId } },
     });
   }
+
+  async getOneTodo(todoId: number) {
+    return await this.todoRepository.findOneBy({ id: todoId });
+  }
+
+  async updateTodo(title: string, content: string, todoId: number) {
+    const todo = await this.todoRepository.findOneBy({ id: todoId });
+
+    if (!todo)
+      throw new NotFoundException(`Todo with id ${todoId} was not found`);
+
+    todo.title = title;
+    todo.content = content;
+
+    return this.todoRepository.save(todo);
+  }
 }
