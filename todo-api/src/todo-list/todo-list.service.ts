@@ -22,6 +22,12 @@ export class TodoListService {
     return this.todoListRepository.save(todoList);
   }
 
+  async getTodoLists(email: string) {
+    const user = await this.usersService.findOne(email);
+
+    return this.todoListRepository.find({ where: { user } });
+  }
+
   async createTodo(title: string, content: string, todoListId: number) {
     const todoList = await this.todoListRepository.findOne({
       where: { id: todoListId },
@@ -36,5 +42,11 @@ export class TodoListService {
     todo.todoList = todoList;
 
     return this.todoRepository.save(todo);
+  }
+
+  async getTodos(todoListId: number) {
+    return await this.todoRepository.find({
+      where: { todoList: { id: todoListId } },
+    });
   }
 }
