@@ -9,6 +9,9 @@ import { LocalConfigModule } from './local-config/local-config.module';
 import { APP_PIPE } from '@nestjs/core';
 import { UsedTokensModule } from './tokens/used-tokens.module';
 import { UsedToken } from './tokens/used-token.entity';
+import { TodoListModule } from './todo-list/todo-list.module';
+import { TodoList } from './todo-list/todo-list.entity';
+import { Todo } from './todo-list/todo.entity';
 
 @Module({
   imports: [
@@ -17,11 +20,12 @@ import { UsedToken } from './tokens/used-token.entity';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'db.sqlite',
-      entities: [User, UsedToken],
+      entities: [User, UsedToken, Todo, TodoList],
       synchronize: true,
     }),
     LocalConfigModule,
     UsedTokensModule,
+    TodoListModule,
   ],
   controllers: [AppController],
   providers: [

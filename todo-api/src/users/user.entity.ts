@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { TodoList } from '../todo-list/todo-list.entity';
 
 @Entity()
 export class User {
@@ -13,4 +14,7 @@ export class User {
 
   @Column({ default: false })
   emailVerified: boolean;
+
+  @OneToMany(() => TodoList, todoList => todoList.user)
+  todoLists: TodoList[];
 }
