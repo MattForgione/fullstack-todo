@@ -1,4 +1,8 @@
-<nav [tabPanel]="tabPanel" backgroundColor="accent" mat-tab-nav-bar>
+<nav
+  class="mat-elevation-z6 nav-bar-main"
+  [tabPanel]="tabPanel"
+  backgroundColor="primary"
+  mat-tab-nav-bar>
   <div *ngIf="signedIn; else notSignedIn">
     <a mat-tab-link routerLink="/">Home</a>
     <a mat-tab-link routerLink="/auth/logout">Logout</a>

@@ -1,7 +1,9 @@
 <mat-drawer-container class="todo-list-container" autosize>
   <mat-drawer class="todo-list-nav" #drawer mode="side" opened>
+    <mat-toolbar color="primary">
+      <h3>Todo Lists</h3>
+    </mat-toolbar>
     <div class="todo-list-nav--content">
-      <h3 class="todo-list-nav--title">Todo Lists</h3>
       <div
         [ngStyle]="{ 'background-color': selected === i ? 'grey' : 'white' }"
         (click)="onSelect(i)"
@@ -11,7 +13,7 @@
       </div>
     </div>
   </mat-drawer>
-  <div class="module-title--wrapper">
+  <mat-toolbar class="module-title--wrapper" color="primary">
     <div (click)="drawer.toggle()">
       <div
         class="hide-show--container"
@@ -29,5 +31,6 @@
     <div class="module-title--container">
       <h1 class="module-title--title">Dashboard</h1>
     </div>
-  </div>
+  </mat-toolbar>
+  <div class="display-container"></div>
 </mat-drawer-container>
