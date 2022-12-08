@@ -1,1 +1,33 @@
-<p>home works!</p>
+<mat-drawer-container class="todo-list-container" autosize>
+  <mat-drawer class="todo-list-nav" #drawer mode="side" opened>
+    <div class="todo-list-nav--content">
+      <h3 class="todo-list-nav--title">Todo Lists</h3>
+      <div
+        [ngStyle]="{ 'background-color': selected === i ? 'grey' : 'white' }"
+        (click)="onSelect(i)"
+        class="todo-list-nav--list-item"
+        *ngFor="let i of nums">
+        <p class="todo-list-nav--list-item--text">Example todo {{ i }}</p>
+      </div>
+    </div>
+  </mat-drawer>
+  <div class="module-title--wrapper">
+    <div (click)="drawer.toggle()">
+      <div
+        class="hide-show--container"
+        *ngIf="drawer.opened; else drawerClosed">
+        <mat-icon class="arrow-icon">keyboard_arrow_left</mat-icon>
+        <p class="icon-text">Hide</p>
+      </div>
+      <ng-template #drawerClosed>
+        <div class="hide-show--container">
+          <mat-icon class="arrow-icon">keyboard_arrow_right</mat-icon>
+          <p class="icon-text">Show</p>
+        </div>
+      </ng-template>
+    </div>
+    <div class="module-title--container">
+      <h1 class="module-title--title">Dashboard</h1>
+    </div>
+  </div>
+</mat-drawer-container>

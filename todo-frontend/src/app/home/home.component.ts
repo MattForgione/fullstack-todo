@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.sass'],
 })
 export class HomeComponent {
-  constructor() {}
+  selected: number | undefined;
+  nums: number[] = [];
+
+  constructor() {
+    for (let i = 1; i < 101; i++) {
+      this.nums.push(i);
+    }
+  }
+
+  onSelect(i: number) {
+    this.selected = i;
+  }
 }
