@@ -11,7 +11,7 @@ export interface UserTodoList {
   created_at: Date;
 }
 
-export interface TodoList {
+export interface Todo {
   id: number;
   title: string;
   content: string;

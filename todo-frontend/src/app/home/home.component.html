@@ -33,5 +33,13 @@
       <h1 class="module-title--title">Dashboard</h1>
     </div>
   </mat-toolbar>
-  <div class="display-container"></div>
+  <div class="display-container">
+    <div *ngIf="selectedTodoList">
+      <h1>{{ selectedTodoList.title }}</h1>
+      <div *ngFor="let todo of todos">
+        <h3>{{ todo.title }}</h3>
+        <p>{{ todo.content }}</p>
+      </div>
+    </div>
+  </div>
 </mat-drawer-container>

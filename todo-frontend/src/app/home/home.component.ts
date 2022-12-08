@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserTodoList } from '../../interfaces';
+import { Todo, UserTodoList } from '../../interfaces';
 import { TodoListService } from './todo-list.service';
 
 @Component({
@@ -8,7 +8,8 @@ import { TodoListService } from './todo-list.service';
   styleUrls: ['./home.component.sass'],
 })
 export class HomeComponent {
-  selected: UserTodoList | undefined;
+  selectedTodoList!: UserTodoList;
+  todos!: Todo[];
   todoLists!: UserTodoList[];
 
   constructor(private todoListService: TodoListService) {
@@ -19,7 +20,11 @@ export class HomeComponent {
   }
 
   onSelect(todoList: UserTodoList) {
-    this.selected = todoList;
-    console.log(this.selected);
+    this.selectedTodoList = todoList;
+    this.todoListService
+      .getTodoList(this.selectedTodoList.id)
+      .subscribe(result => {
+        this.todos = result;
+      });
   }
 }

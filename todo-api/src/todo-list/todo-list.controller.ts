@@ -44,8 +44,8 @@ export class TodoListController {
     );
   }
 
-  @Get(':todoListId')
-  async getTodos(@Param('todoListId') todoListId: string) {
+  @Get('todos')
+  async getTodos(@Query('todoListId') todoListId: string) {
     return this.todoListService.getTodos(parseInt(todoListId));
   }
 

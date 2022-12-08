@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DecodedJwtToken, UserTodoList } from '../../interfaces';
+import { DecodedJwtToken, Todo, UserTodoList } from '../../interfaces';
 import { environment } from '../../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import jwt_decode from 'jwt-decode';
@@ -20,6 +20,12 @@ export class TodoListService {
 
     return this.http.get<UserTodoList[]>(
       `${this.url}/todo-list?email=${decoded.email}`
+    );
+  }
+
+  getTodoList(id: number) {
+    return this.http.get<Todo[]>(
+      `${this.url}/todo-list/todos?todoListId=${id}`
     );
   }
 }
