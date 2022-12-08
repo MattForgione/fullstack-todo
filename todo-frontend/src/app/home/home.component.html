@@ -5,11 +5,12 @@
     </mat-toolbar>
     <div class="todo-list-nav--content">
       <div
-        [ngStyle]="{ 'background-color': selected === i ? 'grey' : 'white' }"
-        (click)="onSelect(i)"
+        (click)="onSelect(todoList)"
         class="todo-list-nav--list-item"
-        *ngFor="let i of nums">
-        <p class="todo-list-nav--list-item--text">Example todo {{ i }}</p>
+        *ngFor="let todoList of todoLists">
+        <p class="todo-list-nav--list-item--text">
+          {{ todoList.title }}
+        </p>
       </div>
     </div>
   </mat-drawer>

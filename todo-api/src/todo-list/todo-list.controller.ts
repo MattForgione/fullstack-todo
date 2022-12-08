@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { TodoListService } from './todo-list.service';
 import { UpdateTodoDto } from './dto/update-todo.dto';
@@ -21,9 +22,7 @@ export class TodoListController {
   }
 
   @Get()
-  async getTodoLists(@Body() body: { email: string }) {
-    const { email } = body;
-
+  async getTodoLists(@Query('email') email: string) {
     return this.todoListService.getTodoLists(email);
   }
 

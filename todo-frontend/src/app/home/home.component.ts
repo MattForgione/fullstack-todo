@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UserTodoList } from '../../interfaces';
+import { TodoListService } from './todo-list.service';
 
 @Component({
   selector: 'app-home',
@@ -6,16 +8,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.sass'],
 })
 export class HomeComponent {
-  selected: number | undefined;
-  nums: number[] = [];
+  selected: UserTodoList | undefined;
+  todoLists!: UserTodoList[];
 
-  constructor() {
-    for (let i = 1; i < 101; i++) {
-      this.nums.push(i);
-    }
+  constructor(private todoListService: TodoListService) {
+    this.todoListService.getUserTodoLists().subscribe(result => {
+      this.todoLists = result;
+      console.log(this.todoLists);
+    });
   }
 
-  onSelect(i: number) {
-    this.selected = i;
+  onSelect(todoList: UserTodoList) {
+    this.selected = todoList;
+    console.log(this.selected);
   }
 }
