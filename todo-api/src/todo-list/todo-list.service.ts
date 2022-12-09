@@ -67,7 +67,12 @@ export class TodoListService {
     return await this.todoRepository.findOneBy({ id: todoId });
   }
 
-  async updateTodo(title: string, content: string, todoId: number) {
+  async updateTodo(
+    title: string,
+    content: string,
+    complete: boolean,
+    todoId: number
+  ) {
     const todo = await this.todoRepository.findOneBy({ id: todoId });
 
     if (!todo)
@@ -75,6 +80,7 @@ export class TodoListService {
 
     todo.title = title;
     todo.content = content;
+    todo.complete = complete;
 
     return this.todoRepository.save(todo);
   }

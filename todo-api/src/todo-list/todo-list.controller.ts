@@ -59,8 +59,13 @@ export class TodoListController {
     @Param('todoId') todoId: string,
     @Body() body: UpdateTodoDto
   ) {
-    const { title, content } = body;
-    return this.todoListService.updateTodo(title, content, parseInt(todoId));
+    const { title, content, complete } = body;
+    return this.todoListService.updateTodo(
+      title,
+      content,
+      complete,
+      parseInt(todoId)
+    );
   }
 
   @Delete('todo/:todoId')
