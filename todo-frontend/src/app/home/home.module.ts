@@ -10,9 +10,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { DashboardPlaceholderComponent } from './dashboard-placeholder/dashboard-placeholder.component';
+import { TodoListNotFoundComponent } from './todo-list-not-found/todo-list-not-found.component';
 
 @NgModule({
-  declarations: [HomeComponent, NotFoundComponent, TodoListComponent],
+  declarations: [
+    HomeComponent,
+    NotFoundComponent,
+    TodoListComponent,
+    DashboardPlaceholderComponent,
+    TodoListNotFoundComponent,
+  ],
   imports: [
     CommonModule,
     HomeRoutingModule,
