@@ -40,6 +40,13 @@ export class TodoListService {
       const altered = await this.todoListRepository.findOneBy({
         id: todoListId,
       });
+
+      if (!altered) {
+        throw new NotFoundException(
+          `TodoList with id ${todoListId} was not found`
+        );
+      }
+
       altered.todos = [];
 
       return altered;
