@@ -23,8 +23,8 @@ export class TodoListService {
   }
 
   getTodoList(id: number) {
-    return this.http.get<Todo[]>(
-      `${this.url}/todo-list/todos?todoListId=${id}`
+    return this.http.get<UserTodoList>(
+      `${this.url}/todo-list/full-todo-list?todoListId=${id}`
     );
   }
 }

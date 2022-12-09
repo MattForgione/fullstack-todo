@@ -29,12 +29,23 @@ export class TodoListService {
   }
 
   async getTodoList(todoListId: number) {
-    return await this.todoListRepository
+    const result = await this.todoListRepository
       .createQueryBuilder('todoList')
       .where('todoList.id = :id', { id: todoListId })
       .leftJoinAndSelect('todoList.todos', 'todos')
       .where('todos.todoList.id = :id', { id: todoListId })
       .getOne();
+
+    if (!result) {
+      const altered = await this.todoListRepository.findOneBy({
+        id: todoListId,
+      });
+      altered.todos = [];
+
+      return altered;
+    }
+
+    return result;
   }
 
   async deleteTodoList(todoListId: number) {
