@@ -1,9 +1,9 @@
-.todo-list-container
+.home-container
   width: calc(100vw)
   height: calc(100vh - 47.997px)
   overflow: unset
 
-.todo-list-nav
+.home-todo-lists-nav
   &--title
     margin: 0 0 8px 0
 
@@ -16,6 +16,9 @@
     display: flex
     flex-direction: row
     align-self: start
+
+    &:hover
+      cursor: pointer
 
     &--text
       margin: 10px 0
@@ -42,7 +45,40 @@
     margin: 0
     padding: 8px
 
+.todo-list
+  margin: 10px 0
+
 .display-container
   margin: 8px
   width: calc(100% - 16px)
   height: calc(100% - 100px)
+
+
+.todo-content
+  margin: 8px 0
+
+.todo-icon-container
+  display: flex
+  flex-direction: row
+  margin: 16px 0 0 0
+
+.todo-icon-wrapper
+  display: flex
+  flex-direction: column
+  width: 40px
+  line-height: 16px
+  font-size: 12px
+  align-items: center
+  margin: 0 8px 0 0
+
+  &:hover
+    cursor: pointer
+
+.todo-icon
+  height: 14px
+  text-align: center
+  font-size: 12px
+
+.todo-icon-text
+  margin: 0
+  height: 14px

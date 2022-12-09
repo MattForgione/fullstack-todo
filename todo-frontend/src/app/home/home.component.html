@@ -1,14 +1,14 @@
-<mat-drawer-container class="todo-list-container" autosize>
-  <mat-drawer class="todo-list-nav" #drawer mode="side" opened>
+<mat-drawer-container class="home-container" autosize>
+  <mat-drawer class="home-todo-lists-nav" #drawer mode="side" opened>
     <mat-toolbar color="primary">
       <h3>Todo Lists</h3>
     </mat-toolbar>
-    <div class="todo-list-nav--content">
+    <div class="home-todo-lists-nav--content">
       <div
         (click)="onSelect(todoList)"
-        class="todo-list-nav--list-item"
+        class="home-todo-lists-nav--list-item"
         *ngFor="let todoList of todoLists">
-        <p class="todo-list-nav--list-item--text">
+        <p class="home-todo-lists-nav--list-item--text">
           {{ todoList.title }}
         </p>
       </div>
@@ -35,11 +35,50 @@
   </mat-toolbar>
   <div class="display-container">
     <div *ngIf="selectedTodoList">
-      <h1>{{ selectedTodoList.title }}</h1>
-      <div *ngFor="let todo of todos">
-        <h3>{{ todo.title }}</h3>
-        <p>{{ todo.content }}</p>
-      </div>
+      <mat-card class="mat-elevation-z2">
+        <mat-card-header>
+          <mat-card-title>{{ selectedTodoList.title }}</mat-card-title>
+        </mat-card-header>
+        <hr />
+        <mat-card-content>
+          <mat-expansion-panel
+            *ngFor="let todo of todos"
+            hideToggle
+            #mep="matExpansionPanel"
+            class="todo-list mat-elevation-z2">
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{ todo.title }}</mat-panel-title>
+              <mat-icon *ngIf="mep.expanded; else notExpanded"
+                >keyboard_arrow_up
+              </mat-icon>
+              <ng-template #notExpanded>
+                <mat-icon>keyboard_arrow_down</mat-icon>
+              </ng-template>
+            </mat-expansion-panel-header>
+            <mat-card class="mat-elevation-z2">
+              <p class="todo-content">{{ todo.content }}</p>
+            </mat-card>
+            <div class="todo-icon-container">
+              <div class="todo-icon-wrapper" (click)="todoEditClicked(todo.id)">
+                <mat-icon class="todo-icon">edit</mat-icon>
+                <p class="todo-icon-text">Edit</p>
+              </div>
+              <div
+                class="todo-icon-wrapper"
+                (click)="todoCompleteClicked(todo.id)">
+                <mat-icon class="todo-icon">assignment_turned_in</mat-icon>
+                <p class="todo-icon-text">Done</p>
+              </div>
+              <div
+                class="todo-icon-wrapper"
+                (click)="todoDeleteClicked(todo.id)">
+                <mat-icon class="todo-icon">delete</mat-icon>
+                <p class="todo-icon-text">Del</p>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </mat-drawer-container>

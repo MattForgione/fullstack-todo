@@ -27,4 +27,16 @@ export class HomeComponent {
         this.todos = result;
       });
   }
+
+  todoEditClicked(todoId: number) {
+    console.log(`Todo edit clicked: ${todoId}`);
+  }
+
+  todoCompleteClicked(todoId: number) {
+    console.log(`Todo complete clicked: ${todoId}`);
+  }
+
+  todoDeleteClicked(todoId: number) {
+    console.log(`Todo delete clicked: ${todoId}`);
+  }
 }
