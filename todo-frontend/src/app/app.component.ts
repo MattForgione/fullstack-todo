@@ -22,7 +22,6 @@ export class AppComponent {
       )
       .subscribe(signedIn => {
         this.signedIn = signedIn;
-        console.log(this.signedIn);
       });
   }
 }

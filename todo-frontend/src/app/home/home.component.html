@@ -47,7 +47,12 @@
             #mep="matExpansionPanel"
             class="todo-list mat-elevation-z2">
             <mat-expansion-panel-header>
-              <mat-panel-title>{{ todo.title }}</mat-panel-title>
+              <mat-panel-title
+                [ngStyle]="{
+                  'text-decoration': todo.complete ? 'line-through' : 'none'
+                }">
+                {{ todo.title }}
+              </mat-panel-title>
               <mat-icon *ngIf="mep.expanded; else notExpanded"
                 >keyboard_arrow_up
               </mat-icon>

@@ -15,7 +15,6 @@ export class HomeComponent {
   constructor(private todoListService: TodoListService) {
     this.todoListService.getUserTodoLists().subscribe(result => {
       this.todoLists = result;
-      console.log(this.todoLists);
     });
   }
 

@@ -16,7 +16,6 @@ export class TodoListService {
   getUserTodoLists() {
     const cookie = this.cookieService.get('authToken');
     const decoded = jwt_decode(cookie) as DecodedJwtToken;
-    console.log(decoded);
 
     return this.http.get<UserTodoList[]>(
       `${this.url}/todo-list?email=${decoded.email}`
