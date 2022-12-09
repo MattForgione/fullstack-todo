@@ -34,56 +34,6 @@
     </div>
   </mat-toolbar>
   <div class="display-container">
-    <div *ngIf="selectedTodoList">
-      <mat-card class="mat-elevation-z2">
-        <mat-card-header>
-          <mat-card-title>{{ selectedTodoList.title }}</mat-card-title>
-        </mat-card-header>
-        <hr />
-        <mat-card-content>
-          <mat-expansion-panel
-            *ngFor="let todo of todos"
-            hideToggle
-            #mep="matExpansionPanel"
-            class="todo-list mat-elevation-z2">
-            <mat-expansion-panel-header>
-              <mat-panel-title
-                [ngStyle]="{
-                  'text-decoration': todo.complete ? 'line-through' : 'none'
-                }">
-                {{ todo.title }}
-              </mat-panel-title>
-              <mat-icon *ngIf="mep.expanded; else notExpanded"
-                >keyboard_arrow_up
-              </mat-icon>
-              <ng-template #notExpanded>
-                <mat-icon>keyboard_arrow_down</mat-icon>
-              </ng-template>
-            </mat-expansion-panel-header>
-            <mat-card class="mat-elevation-z2">
-              <p class="todo-content">{{ todo.content }}</p>
-            </mat-card>
-            <div class="todo-icon-container">
-              <div class="todo-icon-wrapper" (click)="todoEditClicked(todo.id)">
-                <mat-icon class="todo-icon">edit</mat-icon>
-                <p class="todo-icon-text">Edit</p>
-              </div>
-              <div
-                class="todo-icon-wrapper"
-                (click)="todoCompleteClicked(todo.id)">
-                <mat-icon class="todo-icon">assignment_turned_in</mat-icon>
-                <p class="todo-icon-text">Done</p>
-              </div>
-              <div
-                class="todo-icon-wrapper"
-                (click)="todoDeleteClicked(todo.id)">
-                <mat-icon class="todo-icon">delete</mat-icon>
-                <p class="todo-icon-text">Del</p>
-              </div>
-            </div>
-          </mat-expansion-panel>
-        </mat-card-content>
-      </mat-card>
-    </div>
+    <router-outlet></router-outlet>
   </div>
 </mat-drawer-container>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Todo, UserTodoList } from '../../interfaces';
 import { TodoListService } from './todo-list.service';
+import { Router } from '@angular/router';
+import { UserTodoList } from '../../interfaces';
 
 @Component({
   selector: 'app-home',
@@ -9,10 +10,12 @@ import { TodoListService } from './todo-list.service';
 })
 export class HomeComponent {
   selectedTodoList!: UserTodoList;
-  todos!: Todo[];
   todoLists!: UserTodoList[];
 
-  constructor(private todoListService: TodoListService) {
+  constructor(
+    private todoListService: TodoListService,
+    private router: Router
+  ) {
     this.todoListService.getUserTodoLists().subscribe(result => {
       this.todoLists = result;
     });
@@ -20,22 +23,6 @@ export class HomeComponent {
 
   onSelect(todoList: UserTodoList) {
     this.selectedTodoList = todoList;
-    this.todoListService
-      .getTodoList(this.selectedTodoList.id)
-      .subscribe(result => {
-        this.todos = result;
-      });
-  }
-
-  todoEditClicked(todoId: number) {
-    console.log(`Todo edit clicked: ${todoId}`);
-  }
-
-  todoCompleteClicked(todoId: number) {
-    console.log(`Todo complete clicked: ${todoId}`);
-  }
-
-  todoDeleteClicked(todoId: number) {
-    console.log(`Todo delete clicked: ${todoId}`);
+    this.router.navigateByUrl(`todo-list/${todoList.id}`);
   }
 }

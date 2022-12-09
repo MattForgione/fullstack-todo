@@ -9,6 +9,7 @@ export interface UserTodoList {
   id: number;
   title: string;
   created_at: Date;
+  todos: Todo[] | [];
 }
 
 export interface Todo {
@@ -16,6 +17,7 @@ export interface Todo {
   title: string;
   content: string;
   complete: boolean;
+  todoList: UserTodoList;
   created_at: Date;
   updated_at: Date;
 }

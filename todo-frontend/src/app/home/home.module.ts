@@ -9,9 +9,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
+import { TodoListComponent } from './todo-list/todo-list.component';
 
 @NgModule({
-  declarations: [HomeComponent, NotFoundComponent],
+  declarations: [HomeComponent, NotFoundComponent, TodoListComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
