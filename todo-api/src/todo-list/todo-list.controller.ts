@@ -26,6 +26,11 @@ export class TodoListController {
     return this.todoListService.getTodoLists(email);
   }
 
+  @Get('full-todo-list')
+  async getFullTodoList(@Query('todoListId') todoListId: string) {
+    return this.todoListService.getTodoList(parseInt(todoListId));
+  }
+
   @Delete(':todoListId')
   async deleteTodoList(@Param('todoListId') todoListId: string) {
     return this.todoListService.deleteTodoList(parseInt(todoListId));

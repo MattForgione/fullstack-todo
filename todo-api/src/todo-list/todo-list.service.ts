@@ -28,6 +28,15 @@ export class TodoListService {
     return this.todoListRepository.find({ where: { user } });
   }
 
+  async getTodoList(todoListId: number) {
+    return await this.todoListRepository
+      .createQueryBuilder('todoList')
+      .where('todoList.id = :id', { id: todoListId })
+      .leftJoinAndSelect('todoList.todos', 'todos')
+      .where('todos.todoList.id = :id', { id: todoListId })
+      .getOne();
+  }
+
   async deleteTodoList(todoListId: number) {
     const todoList = await this.todoListRepository.findOneBy({
       id: todoListId,
@@ -58,9 +67,12 @@ export class TodoListService {
   }
 
   async getTodos(todoListId: number) {
-    return await this.todoRepository.find({
-      where: { todoList: { id: todoListId } },
-    });
+    return await this.todoRepository
+      .createQueryBuilder('todo')
+      .where('todo.todoListId = :todoListId', { todoListId })
+      .leftJoinAndSelect('todo.todoList', 'todoList')
+      .where('todoList.id = :id', { id: todoListId })
+      .getMany();
   }
 
   async getOneTodo(todoId: number) {
