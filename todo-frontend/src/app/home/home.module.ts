@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { DashboardPlaceholderComponent } from './dashboard-placeholder/dashboard-placeholder.component';
 import { TodoListNotFoundComponent } from './todo-list-not-found/todo-list-not-found.component';
+import { TodoListIndexComponent } from './todo-list-index/todo-list-index.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { TodoListNotFoundComponent } from './todo-list-not-found/todo-list-not-f
     TodoListComponent,
     DashboardPlaceholderComponent,
     TodoListNotFoundComponent,
+    TodoListIndexComponent,
   ],
   imports: [
     CommonModule,

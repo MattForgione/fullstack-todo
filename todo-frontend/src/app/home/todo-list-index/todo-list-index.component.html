@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+  <h3>Todo Lists</h3>
+</mat-toolbar>
+<div class="todo-list-index--content">
+  <div
+    (click)="onSelect(todoList)"
+    class="todo-list-index--list-item"
+    *ngFor="let todoList of todoLists">
+    <p
+      [ngStyle]="{
+        'text-decoration': selectedTodoList === todoList ? 'underline' : 'none'
+      }"
+      class="todo-list-index--list-item--text">
+      {{ todoList.title }}
+    </p>
+  </div>
+</div>

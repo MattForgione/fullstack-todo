@@ -1,18 +1,6 @@
 <mat-drawer-container class="home-container" autosize>
   <mat-drawer class="home-todo-lists-nav" #drawer mode="side" opened>
-    <mat-toolbar color="primary">
-      <h3>Todo Lists</h3>
-    </mat-toolbar>
-    <div class="home-todo-lists-nav--content">
-      <div
-        (click)="onSelect(todoList)"
-        class="home-todo-lists-nav--list-item"
-        *ngFor="let todoList of todoLists">
-        <p class="home-todo-lists-nav--list-item--text">
-          {{ todoList.title }}
-        </p>
-      </div>
-    </div>
+    <app-todo-list-index></app-todo-list-index>
   </mat-drawer>
   <mat-toolbar class="module-title--wrapper" color="primary">
     <div (click)="drawer.toggle()">

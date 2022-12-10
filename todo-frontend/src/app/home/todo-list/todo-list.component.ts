@@ -13,7 +13,6 @@ export class TodoListComponent {
   constructor(private route: ActivatedRoute) {
     this.route.data.subscribe(({ todos }) => {
       this.todoList = todos;
-      console.log(this.todoList);
     });
   }
 
