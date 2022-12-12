@@ -12,7 +12,7 @@ interface FormLoginData {
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass'],
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   loginForm = this.fb.group({

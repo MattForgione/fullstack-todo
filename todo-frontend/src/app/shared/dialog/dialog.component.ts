@@ -11,7 +11,7 @@ export interface DialogData {
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.sass'],
+  styleUrls: ['./dialog.component.scss'],
 })
 export class DialogComponent implements OnInit {
   @Input() standalone = true;

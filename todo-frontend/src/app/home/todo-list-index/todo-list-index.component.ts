@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-todo-list-index',
   templateUrl: './todo-list-index.component.html',
-  styleUrls: ['./todo-list-index.component.sass'],
+  styleUrls: ['./todo-list-index.component.scss'],
 })
 export class TodoListIndexComponent implements OnInit {
   selectedTodoList!: UserTodoList | undefined;

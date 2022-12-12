@@ -1,0 +1,46 @@
+.page {
+	display: flex;
+  justify-content: center;
+}
+
+.form-shell { 
+	display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.form {
+	display: flex;
+  flex-direction: column;
+}
+
+.response-error-container {
+	margin-top: 5px;
+  padding: 0 0 15px 0;
+}
+
+.response-error-container:hover {
+  background: none;
+}
+
+.button-container {
+  display: block;
+}
+
+.button { 
+	width: auto;
+  max-width: 300px;
+  text-align: left;
+}
+
+.error-button {
+	padding: 8px ;
+  white-space: pre-wrap;
+  line-height: 16px ;
+}
+  
+.reset-container {
+  margin-top: 15px;
+}
+
