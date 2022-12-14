@@ -3,13 +3,31 @@
   [tabPanel]="tabPanel"
   backgroundColor="primary"
   mat-tab-nav-bar>
-  <div *ngIf="signedIn; else notSignedIn">
-    <a mat-tab-link routerLink="/">Home</a>
+  <ng-container *ngIf="signedIn; else notSignedIn">
+    <a
+      mat-tab-link
+      (click)="activeLink = 'home'"
+      [active]="activeLink === 'home'"
+      routerLink="/"
+      >Home</a
+    >
     <a mat-tab-link routerLink="/auth/logout">Logout</a>
-  </div>
+  </ng-container>
   <ng-template #notSignedIn>
-    <a mat-tab-link routerLink="/auth/login">Login</a>
-    <a mat-tab-link routerLink="/auth/signup">Signup</a>
+    <a
+      mat-tab-link
+      (click)="activeLink = 'login'"
+      [active]="activeLink === 'login'"
+      routerLink="/auth/login"
+      >Login</a
+    >
+    <a
+      mat-tab-link
+      (click)="activeLink = 'signup'"
+      [active]="activeLink === 'signup'"
+      routerLink="/auth/signup"
+      >Signup</a
+    >
   </ng-template>
 </nav>
 

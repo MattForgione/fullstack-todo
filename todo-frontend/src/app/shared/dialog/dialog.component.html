@@ -3,6 +3,6 @@
   <p class="mat-body">{{ data.content }}</p>
 </div>
 <ng-template [cdkPortalOutlet]="portal"></ng-template>
-<div mat-dialog-actions *ngIf="standalone">
-  <button (click)="onNoClick()" mat-button>Ok!</button>
+<div mat-dialog-actions *ngIf="standalone" class="dialog-actions">
+  <button (click)="onNoClick()" mat-flat-button>Ok!</button>
 </div>

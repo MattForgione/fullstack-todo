@@ -10,6 +10,7 @@ import { filter, mergeMap } from 'rxjs';
 })
 export class AppComponent {
   signedIn!: boolean;
+  activeLink: string = '';
 
   constructor(private authService: AuthService, private router: Router) {
     router.events
