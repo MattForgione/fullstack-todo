@@ -4,7 +4,7 @@ import { MatchPassword } from '../../shared/validators/match-password';
 import { AuthService } from '../auth.service';
 import { finalize } from 'rxjs';
 import { DialogComponent } from '../../shared/dialog/dialog.component';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 interface SignupData {
