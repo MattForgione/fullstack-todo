@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{ data.title }}</h2>
 <div mat-dialog-content *ngIf="data.content">
-  {{ data.content }}
+  <p class="mat-body">{{ data.content }}</p>
 </div>
 <ng-template [cdkPortalOutlet]="portal"></ng-template>
 <div mat-dialog-actions *ngIf="standalone">
