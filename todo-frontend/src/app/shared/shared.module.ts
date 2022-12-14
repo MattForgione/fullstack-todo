@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InputComponent } from './input/input.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
+import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormComponent } from './form/form.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
+import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 import { DialogComponent } from './dialog/dialog.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { RouterLinkWithHref } from '@angular/router';
+import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
+import { RouterLink } from '@angular/router';
 import { DialogModule } from '@angular/cdk/dialog';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { DialogModule } from '@angular/cdk/dialog';
     MatCardModule,
     MatButtonModule,
     MatDialogModule,
-    RouterLinkWithHref,
+    RouterLink,
     DialogModule,
   ],
 })
