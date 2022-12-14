@@ -17,7 +17,8 @@
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "plugin:@ngrx/recommended"
       ],
       "rules": {
         "@angular-eslint/directive-selector": [
@@ -58,7 +59,6 @@
         "plugin:prettier/recommended"
       ],
       "rules": {
-        // NOTE: WE ARE OVERRIDING THE DEFAULT CONFIG TO ALWAYS SET THE PARSER TO ANGULAR (SEE BELOW)
         "prettier/prettier": [
           "error",
           {

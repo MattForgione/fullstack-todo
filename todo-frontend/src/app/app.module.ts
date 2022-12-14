@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { MatTabsModule } from '@angular/material/tabs';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { metaReducers, reducers } from './reducers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +19,9 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     MatTabsModule,
     HttpClientModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
