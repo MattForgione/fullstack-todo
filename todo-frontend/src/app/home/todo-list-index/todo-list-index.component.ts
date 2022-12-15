@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserTodoList } from '../../../interfaces';
 import { TodoListService } from '../todo-list.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as TodoListActions from '../../../store/actions/todoLists.actions';
 
 @Component({
   selector: 'app-todo-list-index',
@@ -14,7 +16,8 @@ export class TodoListIndexComponent implements OnInit {
 
   constructor(
     private todoListService: TodoListService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
 
   ngOnInit() {
@@ -25,6 +28,7 @@ export class TodoListIndexComponent implements OnInit {
   }
 
   onSelect(todoList: UserTodoList) {
+    this.store.dispatch(TodoListActions.onSelectTodoList({ todoList }));
     this.router.navigateByUrl(`todo-list/${todoList.id}`);
   }
 }
