@@ -14,3 +14,8 @@ export const selectTodoLists = createSelector(
   selectFeature,
   (state: State) => state.todoLists
 );
+
+export const selectTodoList = (id: number) =>
+  createSelector(selectTodoLists, todoLists => {
+    return todoLists.find(todoList => todoList.id === id);
+  });

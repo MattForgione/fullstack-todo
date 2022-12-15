@@ -25,7 +25,11 @@ export class TodoListService {
   async getTodoLists(email: string) {
     const user = await this.usersService.findOne(email);
 
-    return this.todoListRepository.find({ where: { user } });
+    return await this.todoListRepository
+      .createQueryBuilder('todoList')
+      .where('todoList.userId = :id', { id: user.id })
+      .leftJoinAndSelect('todoList.todos', 'todos')
+      .getMany();
   }
 
   async getTodoList(todoListId: number) {

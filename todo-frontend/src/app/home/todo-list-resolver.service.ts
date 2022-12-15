@@ -6,26 +6,36 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { catchError, EMPTY, Observable, take } from 'rxjs';
+import { catchError, EMPTY, map, Observable } from 'rxjs';
 import { TodoListService } from './todo-list.service';
+import { Store } from '@ngrx/store';
+import { selectTodoList } from '../../store/selectors/todoLists.selectors';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TodoListResolverService implements Resolve<UserTodoList> {
+export class TodoListResolverService
+  implements Resolve<UserTodoList | undefined>
+{
   constructor(
     private todoListService: TodoListService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<UserTodoList> | Promise<UserTodoList> | UserTodoList {
+  ):
+    | Observable<UserTodoList | undefined>
+    | Promise<UserTodoList | undefined>
+    | (UserTodoList | undefined) {
     const { id } = route.params;
-
-    return this.todoListService.getTodoList(id).pipe(
-      take(1),
+    return this.store.select(selectTodoList(parseInt(id))).pipe(
+      map(result => {
+        if (result) return result;
+        throw new TypeError('Is undefined');
+      }),
       catchError(() => {
         this.router.navigateByUrl('/todo-list-not-found');
 

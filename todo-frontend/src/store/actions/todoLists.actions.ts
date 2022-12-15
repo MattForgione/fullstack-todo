@@ -14,3 +14,7 @@ export const todosLoadedSuccess = createAction(
   '[Todos Api] Todo Lists Loaded Success',
   props<{ todoLists: UserTodoList[] }>()
 );
+
+export let todosLoadedFailure = createAction(
+  '[Todos Api] Todo Lists Loaded Failure'
+);
