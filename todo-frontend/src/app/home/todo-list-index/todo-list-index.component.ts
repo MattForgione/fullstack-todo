@@ -4,7 +4,10 @@ import { TodoListService } from '../todo-list.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as TodoListActions from '../../../store/actions/todoLists.actions';
-import { selectCurrentlySelected } from '../../../store/selectors/todoLists.selectors';
+import {
+  selectCurrentlySelected,
+  selectTodoLists,
+} from '../../../store/selectors/todoLists.selectors';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -16,6 +19,8 @@ export class TodoListIndexComponent implements OnInit {
   currentlySelected$: Observable<number | null>;
   selectedTodoList!: UserTodoList | undefined;
   todoLists!: UserTodoList[];
+  todoListsFromEffects$: Observable<UserTodoList[]> =
+    this.store.select(selectTodoLists);
 
   constructor(
     private todoListService: TodoListService,
@@ -29,6 +34,7 @@ export class TodoListIndexComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.dispatch(TodoListActions.loadTodoLists());
     this.todoListService.getUserTodoLists().subscribe(todoLists => {
       this.todoLists = todoLists;
       console.log(this.todoLists);

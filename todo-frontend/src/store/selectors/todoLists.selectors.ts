@@ -9,3 +9,8 @@ export const selectCurrentlySelected = createSelector(
   selectFeature,
   (state: State) => state.currentlySelected
 );
+
+export const selectTodoLists = createSelector(
+  selectFeature,
+  (state: State) => state.todoLists
+);

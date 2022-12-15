@@ -21,5 +21,12 @@ export const todoListReducer = createReducer(
       ...state,
       currentlySelected: todoList.id,
     })
+  ),
+  on(
+    TodoActions.todosLoadedSuccess,
+    (state, { todoLists }): State => ({
+      ...state,
+      todoLists: todoLists,
+    })
   )
 );

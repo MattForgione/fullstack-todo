@@ -7,3 +7,10 @@ export const onSelectTodoList = createAction(
   '[Todo Dashboard] TodoList selected',
   props<{ todoList: UserTodoList }>()
 );
+
+export const loadTodoLists = createAction('[Todo List Index] Load TodoLists');
+
+export const todosLoadedSuccess = createAction(
+  '[Todos Api] Todo Lists Loaded Success',
+  props<{ todoLists: UserTodoList[] }>()
+);

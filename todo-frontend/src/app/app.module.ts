@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { todoListReducer } from '../store/reducers/todoLists.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { TodoListsEffects } from '../store/effects/todoLists.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +24,7 @@ import { todoListReducer } from '../store/reducers/todoLists.reducer';
     HttpClientModule,
     StoreModule.forRoot({ todos: todoListReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    EffectsModule.forRoot([TodoListsEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],
