@@ -18,9 +18,7 @@ import { Observable } from 'rxjs';
 export class TodoListIndexComponent implements OnInit {
   currentlySelected$: Observable<number | null>;
   selectedTodoList!: UserTodoList | undefined;
-  todoLists!: UserTodoList[];
-  todoListsFromEffects$: Observable<UserTodoList[]> =
-    this.store.select(selectTodoLists);
+  todoLists$: Observable<UserTodoList[]> = this.store.select(selectTodoLists);
 
   constructor(
     private todoListService: TodoListService,
@@ -35,10 +33,6 @@ export class TodoListIndexComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(TodoListActions.loadTodoLists());
-    this.todoListService.getUserTodoLists().subscribe(todoLists => {
-      this.todoLists = todoLists;
-      console.log(this.todoLists);
-    });
   }
 
   onSelect(todoList: UserTodoList) {

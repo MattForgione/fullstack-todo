@@ -5,7 +5,7 @@
   <div
     (click)="onSelect(todoList)"
     class="todo-list-index--list-item"
-    *ngFor="let todoList of todoLists">
+    *ngFor="let todoList of todoLists$ | async">
     <p
       [ngStyle]="{
         'text-decoration': selectedTodoList === todoList ? 'underline' : 'none'
