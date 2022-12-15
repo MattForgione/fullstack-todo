@@ -4,6 +4,8 @@ import { TodoListService } from '../todo-list.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as TodoListActions from '../../../store/actions/todoLists.actions';
+import { selectCurrentlySelected } from '../../../store/selectors/todoLists.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-todo-list-index',
@@ -11,6 +13,7 @@ import * as TodoListActions from '../../../store/actions/todoLists.actions';
   styleUrls: ['./todo-list-index.component.scss'],
 })
 export class TodoListIndexComponent implements OnInit {
+  currentlySelected$: Observable<number | null>;
   selectedTodoList!: UserTodoList | undefined;
   todoLists!: UserTodoList[];
 
@@ -18,7 +21,12 @@ export class TodoListIndexComponent implements OnInit {
     private todoListService: TodoListService,
     private router: Router,
     private store: Store
-  ) {}
+  ) {
+    this.currentlySelected$ = this.store.select(selectCurrentlySelected);
+    this.currentlySelected$.subscribe(result => {
+      console.log(result);
+    });
+  }
 
   ngOnInit() {
     this.todoListService.getUserTodoLists().subscribe(todoLists => {
@@ -29,6 +37,7 @@ export class TodoListIndexComponent implements OnInit {
 
   onSelect(todoList: UserTodoList) {
     this.store.dispatch(TodoListActions.onSelectTodoList({ todoList }));
+    this.currentlySelected$ = this.store.select(selectCurrentlySelected);
     this.router.navigateByUrl(`todo-list/${todoList.id}`);
   }
 }
