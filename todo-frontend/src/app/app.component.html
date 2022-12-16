@@ -6,8 +6,8 @@
   <ng-container *ngIf="signedIn; else notSignedIn">
     <a
       mat-tab-link
-      (click)="activeLink = 'home'"
-      [active]="activeLink === 'home'"
+      (click)="selectCurrentNav(routes.HOME)"
+      [active]="compareCurrentNav(routes.HOME) | async"
       routerLink="/"
       >Home</a
     >
@@ -16,15 +16,15 @@
   <ng-template #notSignedIn>
     <a
       mat-tab-link
-      (click)="activeLink = 'login'"
-      [active]="activeLink === 'login'"
+      (click)="selectCurrentNav(routes.LOGIN)"
+      [active]="compareCurrentNav(routes.LOGIN) | async"
       routerLink="/auth/login"
       >Login</a
     >
     <a
       mat-tab-link
-      (click)="activeLink = 'signup'"
-      [active]="activeLink === 'signup'"
+      (click)="selectCurrentNav(routes.SIGNUP)"
+      [active]="compareCurrentNav(routes.SIGNUP) | async"
       routerLink="/auth/signup"
       >Signup</a
     >

@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { UserTodoList } from '../../interfaces';
+import { AppRoutes } from '../../app/app.routes';
 
 export const enter = createAction('[Todo Dashboard] Dashboard enter.');
 
@@ -19,6 +20,11 @@ export const todosLoadedSuccess = createAction(
   props<{ todoLists: UserTodoList[] }>()
 );
 
-export let todosLoadedFailure = createAction(
+export const todosLoadedFailure = createAction(
   '[Todos Api] Todo Lists Loaded Failure'
+);
+
+export const onSelectNavLocation = createAction(
+  '[Navbar] Select Nav Location',
+  props<{ currentNav: AppRoutes }>()
 );

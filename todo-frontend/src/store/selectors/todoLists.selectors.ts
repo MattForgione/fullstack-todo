@@ -19,3 +19,8 @@ export const selectTodoList = (id: number) =>
   createSelector(selectTodoLists, todoLists => {
     return todoLists.find(todoList => todoList.id === id);
   });
+
+export const selectCurrentNav = createSelector(
+  selectFeature,
+  (state: State) => state.currentNav
+);

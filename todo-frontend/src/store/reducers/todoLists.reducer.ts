@@ -1,15 +1,18 @@
 import { createReducer, on } from '@ngrx/store';
 import { UserTodoList } from '../../interfaces';
 import * as TodoActions from '../actions/todoLists.actions';
+import { AppRoutes } from '../../app/app.routes';
 
 export interface State {
   todoLists: UserTodoList[];
   currentlySelected: number | null;
+  currentNav: AppRoutes | null;
 }
 
 export const initialState: State = {
   todoLists: [],
   currentlySelected: null,
+  currentNav: null,
 };
 
 export const todoListReducer = createReducer(
@@ -34,6 +37,13 @@ export const todoListReducer = createReducer(
     (state, { todoLists }): State => ({
       ...state,
       todoLists: todoLists,
+    })
+  ),
+  on(
+    TodoActions.onSelectNavLocation,
+    (state, { currentNav }): State => ({
+      ...state,
+      currentNav,
     })
   )
 );
