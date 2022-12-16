@@ -17,7 +17,6 @@ export const initialState: State = {
 
 export const todoListReducer = createReducer(
   initialState,
-  on(TodoActions.enter, (state): State => ({ ...state })),
   on(
     TodoActions.resetCurrentlySelected,
     (state): State => ({
@@ -44,6 +43,27 @@ export const todoListReducer = createReducer(
     (state, { currentNav }): State => ({
       ...state,
       currentNav,
+    })
+  ),
+  on(
+    TodoActions.onHomePageEntered,
+    (state): State => ({
+      ...state,
+      currentNav: AppRoutes.HOME,
+    })
+  ),
+  on(
+    TodoActions.onLoginPageEntered,
+    (state): State => ({
+      ...state,
+      currentNav: AppRoutes.LOGIN,
+    })
+  ),
+  on(
+    TodoActions.onSignupPageEntered,
+    (state): State => ({
+      ...state,
+      currentNav: AppRoutes.SIGNUP,
     })
   )
 );

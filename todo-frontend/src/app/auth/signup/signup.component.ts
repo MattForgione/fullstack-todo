@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatchPassword } from '../../shared/validators/match-password';
 import { AuthService } from '../auth.service';
@@ -6,6 +6,8 @@ import { finalize } from 'rxjs';
 import { DialogComponent } from '../../shared/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import * as TodoListsActions from '../../../store/actions/todoLists.actions';
+import { Store } from '@ngrx/store';
 
 interface SignupData {
   email: string;
@@ -17,7 +19,7 @@ interface SignupData {
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
   buttonDisabled = false;
 
   signupForm = this.fb.group(
@@ -34,8 +36,13 @@ export class SignupComponent {
     private matchPassword: MatchPassword,
     private authService: AuthService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
+
+  ngOnInit() {
+    this.store.dispatch(TodoListsActions.onSignupPageEntered());
+  }
 
   onSubmit() {
     this.buttonDisabled = true;
