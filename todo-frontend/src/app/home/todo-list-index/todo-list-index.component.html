@@ -8,7 +8,8 @@
     *ngFor="let todoList of todoLists$ | async">
     <p
       [ngStyle]="{
-        'text-decoration': selectedTodoList === todoList ? 'underline' : 'none'
+        'text-decoration':
+          (currentlySelected$ | async) === todoList.id ? 'underline' : 'none'
       }"
       class="todo-list-index--list-item--text mat-body-1">
       {{ todoList.title }}

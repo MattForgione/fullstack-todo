@@ -16,6 +16,13 @@ export const todoListReducer = createReducer(
   initialState,
   on(TodoActions.enter, (state): State => ({ ...state })),
   on(
+    TodoActions.resetCurrentlySelected,
+    (state): State => ({
+      ...state,
+      currentlySelected: null,
+    })
+  ),
+  on(
     TodoActions.onSelectTodoList,
     (state, { todoList }): State => ({
       ...state,

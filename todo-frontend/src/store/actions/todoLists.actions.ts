@@ -3,6 +3,10 @@ import { UserTodoList } from '../../interfaces';
 
 export const enter = createAction('[Todo Dashboard] Dashboard enter.');
 
+export const resetCurrentlySelected = createAction(
+  '[Todo Dashboard] Reset Currently Selected.'
+);
+
 export const onSelectTodoList = createAction(
   '[Todo Dashboard] TodoList selected',
   props<{ todoList: UserTodoList }>()

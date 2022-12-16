@@ -16,20 +16,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./todo-list-index.component.scss'],
 })
 export class TodoListIndexComponent implements OnInit {
-  currentlySelected$: Observable<number | null>;
-  selectedTodoList!: UserTodoList | undefined;
+  currentlySelected$ = this.store.select(selectCurrentlySelected);
   todoLists$: Observable<UserTodoList[]> = this.store.select(selectTodoLists);
 
   constructor(
     private todoListService: TodoListService,
     private router: Router,
     private store: Store
-  ) {
-    this.currentlySelected$ = this.store.select(selectCurrentlySelected);
-    this.currentlySelected$.subscribe(result => {
-      console.log(result);
-    });
-  }
+  ) {}
 
   ngOnInit() {
     this.store.dispatch(TodoListActions.loadTodoLists());
