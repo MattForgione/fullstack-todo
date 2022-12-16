@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TodoListService } from '../../app/home/todo-list.service';
-import * as TodoListsActions from '../actions/todoLists.actions';
 import { catchError, map, of, switchMap } from 'rxjs';
+import { TodoListsActions } from '../actions/todoLists.actions';
 
 @Injectable()
 export class TodoListsEffects {

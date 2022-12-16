@@ -4,7 +4,7 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Store } from '@ngrx/store';
-import * as TodoListsActions from '../../../store/actions/todoLists.actions';
+import { TodoListsActions } from '../../../store/actions/todoLists.actions';
 
 interface FormLoginData {
   email: string;

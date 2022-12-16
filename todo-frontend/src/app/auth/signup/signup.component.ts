@@ -6,8 +6,8 @@ import { finalize } from 'rxjs';
 import { DialogComponent } from '../../shared/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import * as TodoListsActions from '../../../store/actions/todoLists.actions';
 import { Store } from '@ngrx/store';
+import { TodoListsActions } from '../../../store/actions/todoLists.actions';
 
 interface SignupData {
   email: string;

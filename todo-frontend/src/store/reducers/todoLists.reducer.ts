@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { UserTodoList } from '../../interfaces';
-import * as TodoActions from '../actions/todoLists.actions';
 import { AppRoutes } from '../../app/app.routes';
+import { TodoListsActions } from '../actions/todoLists.actions';
 
 export interface State {
   todoLists: UserTodoList[];
@@ -18,49 +18,49 @@ export const initialState: State = {
 export const todoListReducer = createReducer(
   initialState,
   on(
-    TodoActions.resetCurrentlySelected,
+    TodoListsActions.resetCurrentlySelected,
     (state): State => ({
       ...state,
       currentlySelected: null,
     })
   ),
   on(
-    TodoActions.onSelectTodoList,
+    TodoListsActions.onSelectTodoList,
     (state, { todoList }): State => ({
       ...state,
       currentlySelected: todoList.id,
     })
   ),
   on(
-    TodoActions.todosLoadedSuccess,
+    TodoListsActions.todosLoadedSuccess,
     (state, { todoLists }): State => ({
       ...state,
       todoLists: todoLists,
     })
   ),
   on(
-    TodoActions.onSelectNavLocation,
+    TodoListsActions.onSelectNavLocation,
     (state, { currentNav }): State => ({
       ...state,
       currentNav,
     })
   ),
   on(
-    TodoActions.onHomePageEntered,
+    TodoListsActions.onHomePageEntered,
     (state): State => ({
       ...state,
       currentNav: AppRoutes.HOME,
     })
   ),
   on(
-    TodoActions.onLoginPageEntered,
+    TodoListsActions.onLoginPageEntered,
     (state): State => ({
       ...state,
       currentNav: AppRoutes.LOGIN,
     })
   ),
   on(
-    TodoActions.onSignupPageEntered,
+    TodoListsActions.onSignupPageEntered,
     (state): State => ({
       ...state,
       currentNav: AppRoutes.SIGNUP,

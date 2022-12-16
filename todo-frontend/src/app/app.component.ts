@@ -4,8 +4,8 @@ import { Router, Scroll } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs';
 import { AppRoutes } from './app.routes';
 import { Store } from '@ngrx/store';
-import * as TodoListsActions from '../store/actions/todoLists.actions';
-import * as TodoListsSelectors from '../store/selectors/todoLists.selectors';
+import { TodoListsActions } from '../store/actions/todoLists.actions';
+import { TodoListsSelectors } from '../store/selectors/todoLists.selectors';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +18,8 @@ export class AppComponent {
   constructor(
     public store: Store,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private selectors: TodoListsSelectors
   ) {
     router.events
       .pipe(
@@ -45,7 +46,7 @@ export class AppComponent {
 
   public compareCurrentNav(route: AppRoutes) {
     return this.store
-      .select(TodoListsSelectors.selectCurrentNav)
+      .select(this.selectors.selectCurrentNav)
       .pipe(map(currentNav => currentNav === route));
   }
 }

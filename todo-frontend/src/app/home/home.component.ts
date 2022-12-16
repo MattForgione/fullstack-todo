@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as TodoListActions from '../../store/actions/todoLists.actions';
+import { TodoListsActions } from '../../store/actions/todoLists.actions';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +11,6 @@ export class HomeComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.store.dispatch(TodoListActions.onHomePageEntered());
+    this.store.dispatch(TodoListsActions.onHomePageEntered());
   }
 }

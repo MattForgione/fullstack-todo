@@ -9,7 +9,7 @@ import {
 import { catchError, EMPTY, map, Observable } from 'rxjs';
 import { TodoListService } from './todo-list.service';
 import { Store } from '@ngrx/store';
-import { selectTodoList } from '../../store/selectors/todoLists.selectors';
+import { TodoListsSelectors } from '../../store/selectors/todoLists.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +20,8 @@ export class TodoListResolverService
   constructor(
     private todoListService: TodoListService,
     private router: Router,
-    private store: Store
+    private store: Store,
+    private selectors: TodoListsSelectors
   ) {}
 
   resolve(
@@ -31,7 +32,7 @@ export class TodoListResolverService
     | Promise<UserTodoList | undefined>
     | (UserTodoList | undefined) {
     const { id } = route.params;
-    return this.store.select(selectTodoList(parseInt(id))).pipe(
+    return this.store.select(this.selectors.selectTodoList(parseInt(id))).pipe(
       map(result => {
         if (result) return result;
         throw new TypeError('Is undefined');

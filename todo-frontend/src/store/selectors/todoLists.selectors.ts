@@ -1,26 +1,33 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { State } from '../reducers/todoLists.reducer';
+import { Injectable } from '@angular/core';
 
-export const featureKey = 'todos';
+@Injectable({
+  providedIn: 'root',
+})
+export class TodoListsSelectors {
+  featureKey = 'todos';
 
-export const selectFeature = createFeatureSelector<State>(featureKey);
+  selectFeature = createFeatureSelector<State>(this.featureKey);
 
-export const selectCurrentlySelected = createSelector(
-  selectFeature,
-  (state: State) => state.currentlySelected
-);
+  selectCurrentlySelected = createSelector(
+    this.selectFeature,
+    (state: State) => state.currentlySelected
+  );
 
-export const selectTodoLists = createSelector(
-  selectFeature,
-  (state: State) => state.todoLists
-);
+  selectTodoLists = createSelector(
+    this.selectFeature,
+    (state: State) => state.todoLists
+  );
 
-export const selectTodoList = (id: number) =>
-  createSelector(selectTodoLists, todoLists => {
-    return todoLists.find(todoList => todoList.id === id);
-  });
+  selectCurrentNav = createSelector(
+    this.selectFeature,
+    (state: State) => state.currentNav
+  );
 
-export const selectCurrentNav = createSelector(
-  selectFeature,
-  (state: State) => state.currentNav
-);
+  selectTodoList(id: number) {
+    return createSelector(this.selectTodoLists, todoLists => {
+      return todoLists.find(todoList => todoList.id === id);
+    });
+  }
+}
