@@ -13,6 +13,7 @@ import { TodoListsSelectors } from '../../../store/selectors/todoLists.selectors
   styleUrls: ['./todo-list-index.component.scss'],
 })
 export class TodoListIndexComponent implements OnInit {
+  private selectors = new TodoListsSelectors();
   currentlySelected$ = this.store.select(
     this.selectors.selectCurrentlySelected
   );
@@ -23,8 +24,7 @@ export class TodoListIndexComponent implements OnInit {
   constructor(
     private todoListService: TodoListService,
     private router: Router,
-    private store: Store,
-    private selectors: TodoListsSelectors
+    private store: Store
   ) {}
 
   ngOnInit() {

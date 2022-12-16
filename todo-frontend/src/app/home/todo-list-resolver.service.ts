@@ -17,11 +17,12 @@ import { TodoListsSelectors } from '../../store/selectors/todoLists.selectors';
 export class TodoListResolverService
   implements Resolve<UserTodoList | undefined>
 {
+  private selectors = new TodoListsSelectors();
+
   constructor(
     private todoListService: TodoListService,
     private router: Router,
-    private store: Store,
-    private selectors: TodoListsSelectors
+    private store: Store
   ) {}
 
   resolve(

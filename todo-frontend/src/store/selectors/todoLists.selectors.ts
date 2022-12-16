@@ -1,10 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { State } from '../reducers/todoLists.reducer';
-import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
 export class TodoListsSelectors {
   featureKey = 'todos';
 

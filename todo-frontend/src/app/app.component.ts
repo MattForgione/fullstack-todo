@@ -13,13 +13,13 @@ import { TodoListsSelectors } from '../store/selectors/todoLists.selectors';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  private selectors = new TodoListsSelectors();
   signedIn!: boolean;
 
   constructor(
     public store: Store,
     private authService: AuthService,
-    private router: Router,
-    private selectors: TodoListsSelectors
+    private router: Router
   ) {
     router.events
       .pipe(
