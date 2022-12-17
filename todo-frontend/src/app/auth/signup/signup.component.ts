@@ -7,7 +7,7 @@ import { DialogComponent } from '../../shared/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { TodoListsActions } from '../../../store/actions/todoLists.actions';
+import { AppActions } from '../../../store/app/app.actions';
 
 interface SignupData {
   email: string;
@@ -41,7 +41,7 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.store.dispatch(TodoListsActions.onSignupPageEntered());
+    this.store.dispatch(AppActions.onSignupPageEntered());
   }
 
   onSubmit() {

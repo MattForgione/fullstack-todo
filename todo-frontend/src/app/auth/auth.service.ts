@@ -5,8 +5,8 @@ import { CookieService } from 'ngx-cookie-service';
 import jwt_decode from 'jwt-decode';
 import { DecodedJwtToken } from '../../interfaces';
 import { Store } from '@ngrx/store';
-import { TodoListsActions } from '../../store/actions/todoLists.actions';
-import { TodoListsSelectors } from '../../store/selectors/todoLists.selectors';
+import { AuthSelectors } from '../../store/auth/auth.selectors';
+import { AuthActions } from '../../store/auth/auth.actions';
 
 interface AccessTokenResponse {
   access_token: string;
@@ -26,7 +26,7 @@ interface AddTokenResponse {
 })
 export class AuthService {
   url = environment.apiUrl;
-  signedIn$ = this.store.select(new TodoListsSelectors().selectUserSignedIn);
+  signedIn$ = this.store.select(new AuthSelectors().selectUserSignedIn);
 
   constructor(
     private http: HttpClient,
@@ -46,16 +46,12 @@ export class AuthService {
   }
 
   logout() {
-    this.store.dispatch(
-      TodoListsActions.setUserSignedIn({ userSignedIn: false })
-    );
+    this.store.dispatch(AuthActions.setUserSignedIn({ userSignedIn: false }));
     this.cookieService.delete('authToken');
   }
 
   login(email: string, password: string) {
-    this.store.dispatch(
-      TodoListsActions.setUserSignedIn({ userSignedIn: true })
-    );
+    this.store.dispatch(AuthActions.setUserSignedIn({ userSignedIn: true }));
 
     return this.http.post<AccessTokenResponse>(`${this.url}/auth/login`, {
       email,
@@ -66,15 +62,12 @@ export class AuthService {
   checkAuthentication() {
     const cookie = this.cookieService.get('authToken');
     if (cookie && this._isCookieValid(cookie)) {
-      this.store.dispatch(
-        TodoListsActions.setUserSignedIn({ userSignedIn: true })
-      );
-      return;
+      this.store.dispatch(AuthActions.setUserSignedIn({ userSignedIn: true }));
+      return this.signedIn$;
     }
 
-    this.store.dispatch(
-      TodoListsActions.setUserSignedIn({ userSignedIn: false })
-    );
+    this.store.dispatch(AuthActions.setUserSignedIn({ userSignedIn: false }));
+    return this.signedIn$;
   }
 
   signup(email: string, password: string) {

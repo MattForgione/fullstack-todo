@@ -3,14 +3,12 @@ import { CanLoad, Route, Router, UrlSegment, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth/auth.service';
 import { Store } from '@ngrx/store';
-import { TodoListsSelectors } from '../store/selectors/todoLists.selectors';
+import { AuthSelectors } from '../store/auth/auth.selectors';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HomeGuard implements CanLoad {
-  selectors = new TodoListsSelectors();
-
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -25,6 +23,8 @@ export class HomeGuard implements CanLoad {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.store.select(this.selectors.selectUserSignedIn);
+    this.authService.checkAuthentication();
+
+    return this.store.select(new AuthSelectors().selectUserSignedIn);
   }
 }

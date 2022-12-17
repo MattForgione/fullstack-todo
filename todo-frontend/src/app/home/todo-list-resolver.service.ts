@@ -9,7 +9,7 @@ import {
 import { catchError, EMPTY, map, Observable } from 'rxjs';
 import { TodoListService } from './todo-list.service';
 import { Store } from '@ngrx/store';
-import { TodoListsSelectors } from '../../store/selectors/todoLists.selectors';
+import { TodoListsSelectors } from '../../store/todo-lists/todo-lists.selectors';
 
 @Injectable({
   providedIn: 'root',

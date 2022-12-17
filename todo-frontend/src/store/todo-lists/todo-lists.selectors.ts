@@ -1,29 +1,19 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { State } from '../reducers/todoLists.reducer';
+import { TodoListsState } from './todo-lists.reducer';
 
 export class TodoListsSelectors {
   featureKey = 'todos';
 
-  selectFeature = createFeatureSelector<State>(this.featureKey);
+  selectFeature = createFeatureSelector<TodoListsState>(this.featureKey);
 
   selectCurrentlySelected = createSelector(
     this.selectFeature,
-    (state: State) => state.currentlySelected
+    (state: TodoListsState) => state.currentlySelected
   );
 
   selectTodoLists = createSelector(
     this.selectFeature,
-    (state: State) => state.todoLists
-  );
-
-  selectCurrentNav = createSelector(
-    this.selectFeature,
-    (state: State) => state.currentNav
-  );
-
-  selectUserSignedIn = createSelector(
-    this.selectFeature,
-    (state: State) => state.userSignedIn
+    (state: TodoListsState) => state.todoLists
   );
 
   selectTodoList(id: number) {

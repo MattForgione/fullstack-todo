@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { TodoListsActions } from '../../../store/actions/todoLists.actions';
+import { TodoListsActions } from '../../../store/todo-lists/todo-lists.actions';
 
 @Component({
   selector: 'app-dashboard-placeholder',

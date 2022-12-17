@@ -1,20 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { UserTodoList } from '../../interfaces';
-import { AppRoutes } from '../../app/app.routes';
 
 export class TodoListsActions {
-  public static onHomePageEntered = createAction(
-    '[Home Page] Home Page Entered'
-  );
-
-  public static onLoginPageEntered = createAction(
-    '[Login Page] Login Page Entered'
-  );
-
-  public static onSignupPageEntered = createAction(
-    '[Signup Page] Signup Page Entered'
-  );
-
   public static resetCurrentlySelected = createAction(
     '[Todo Dashboard] Reset Currently Selected.'
   );
@@ -35,15 +22,5 @@ export class TodoListsActions {
 
   public static todosLoadedFailure = createAction(
     '[Todos Api] Todo Lists Loaded Failure'
-  );
-
-  public static onSelectNavLocation = createAction(
-    '[Navbar] Select Nav Location',
-    props<{ currentNav: AppRoutes }>()
-  );
-
-  public static setUserSignedIn = createAction(
-    '[Application Message] Set User Sign In Status',
-    props<{ userSignedIn: boolean }>()
   );
 }

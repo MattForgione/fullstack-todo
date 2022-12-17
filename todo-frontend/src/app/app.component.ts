@@ -4,8 +4,8 @@ import { Router, Scroll } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs';
 import { AppRoutes } from './app.routes';
 import { Store } from '@ngrx/store';
-import { TodoListsActions } from '../store/actions/todoLists.actions';
-import { TodoListsSelectors } from '../store/selectors/todoLists.selectors';
+import { AppActions } from '../store/app/app.actions';
+import { AppSelectors } from '../store/app/app.selectors';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,6 @@ import { TodoListsSelectors } from '../store/selectors/todoLists.selectors';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  private selectors = new TodoListsSelectors();
   signedIn!: boolean;
 
   constructor(
@@ -39,14 +38,12 @@ export class AppComponent {
   }
 
   public selectCurrentNav(route: AppRoutes) {
-    this.store.dispatch(
-      TodoListsActions.onSelectNavLocation({ currentNav: route })
-    );
+    this.store.dispatch(AppActions.onSelectNavLocation({ currentNav: route }));
   }
 
   public compareCurrentNav(route: AppRoutes) {
     return this.store
-      .select(this.selectors.selectCurrentNav)
+      .select(new AppSelectors().selectCurrentNav)
       .pipe(map(currentNav => currentNav === route));
   }
 }

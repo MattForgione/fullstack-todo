@@ -4,8 +4,8 @@ import { TodoListService } from '../todo-list.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { TodoListsActions } from '../../../store/actions/todoLists.actions';
-import { TodoListsSelectors } from '../../../store/selectors/todoLists.selectors';
+import { TodoListsActions } from '../../../store/todo-lists/todo-lists.actions';
+import { TodoListsSelectors } from '../../../store/todo-lists/todo-lists.selectors';
 
 @Component({
   selector: 'app-todo-list-index',

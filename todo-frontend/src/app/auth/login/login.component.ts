@@ -4,7 +4,7 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Store } from '@ngrx/store';
-import { TodoListsActions } from '../../../store/actions/todoLists.actions';
+import { AppActions } from '../../../store/app/app.actions';
 
 interface FormLoginData {
   email: string;
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.store.dispatch(TodoListsActions.onLoginPageEntered());
+    this.store.dispatch(AppActions.onLoginPageEntered());
   }
 
   onSubmit() {
