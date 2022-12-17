@@ -7,12 +7,14 @@ export interface State {
   todoLists: UserTodoList[];
   currentlySelected: number | null;
   currentNav: AppRoutes | null;
+  userSignedIn: boolean;
 }
 
 export const initialState: State = {
   todoLists: [],
   currentlySelected: null,
   currentNav: null,
+  userSignedIn: false,
 };
 
 export const todoListReducer = createReducer(
@@ -64,6 +66,13 @@ export const todoListReducer = createReducer(
     (state): State => ({
       ...state,
       currentNav: AppRoutes.SIGNUP,
+    })
+  ),
+  on(
+    TodoListsActions.setUserSignedIn,
+    (state, { userSignedIn }): State => ({
+      ...state,
+      userSignedIn,
     })
   )
 );

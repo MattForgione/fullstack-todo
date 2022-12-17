@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { of } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import jwt_decode from 'jwt-decode';
 import { DecodedJwtToken } from '../../interfaces';
+import { Store } from '@ngrx/store';
+import { TodoListsActions } from '../../store/actions/todoLists.actions';
+import { TodoListsSelectors } from '../../store/selectors/todoLists.selectors';
 
 interface AccessTokenResponse {
   access_token: string;
@@ -24,9 +26,13 @@ interface AddTokenResponse {
 })
 export class AuthService {
   url = environment.apiUrl;
-  signedIn$ = of(false);
+  signedIn$ = this.store.select(new TodoListsSelectors().selectUserSignedIn);
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService,
+    private store: Store
+  ) {}
 
   private _isCookieValid(cookie: string): boolean {
     if (cookie) {
@@ -40,14 +46,16 @@ export class AuthService {
   }
 
   logout() {
-    this.signedIn$ = of(false);
+    this.store.dispatch(
+      TodoListsActions.setUserSignedIn({ userSignedIn: false })
+    );
     this.cookieService.delete('authToken');
-
-    return this.signedIn$;
   }
 
   login(email: string, password: string) {
-    this.signedIn$ = of(true);
+    this.store.dispatch(
+      TodoListsActions.setUserSignedIn({ userSignedIn: true })
+    );
 
     return this.http.post<AccessTokenResponse>(`${this.url}/auth/login`, {
       email,
@@ -58,11 +66,15 @@ export class AuthService {
   checkAuthentication() {
     const cookie = this.cookieService.get('authToken');
     if (cookie && this._isCookieValid(cookie)) {
-      this.signedIn$ = of(true);
+      this.store.dispatch(
+        TodoListsActions.setUserSignedIn({ userSignedIn: true })
+      );
       return;
     }
 
-    this.signedIn$ = of(false);
+    this.store.dispatch(
+      TodoListsActions.setUserSignedIn({ userSignedIn: false })
+    );
   }
 
   signup(email: string, password: string) {

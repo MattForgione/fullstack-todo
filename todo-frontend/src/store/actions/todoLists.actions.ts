@@ -41,4 +41,9 @@ export class TodoListsActions {
     '[Navbar] Select Nav Location',
     props<{ currentNav: AppRoutes }>()
   );
+
+  public static setUserSignedIn = createAction(
+    '[Application Message] Set User Sign In Status',
+    props<{ userSignedIn: boolean }>()
+  );
 }

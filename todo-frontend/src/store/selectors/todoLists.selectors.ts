@@ -21,6 +21,11 @@ export class TodoListsSelectors {
     (state: State) => state.currentNav
   );
 
+  selectUserSignedIn = createSelector(
+    this.selectFeature,
+    (state: State) => state.userSignedIn
+  );
+
   selectTodoList(id: number) {
     return createSelector(this.selectTodoLists, todoLists => {
       return todoLists.find(todoList => todoList.id === id);
