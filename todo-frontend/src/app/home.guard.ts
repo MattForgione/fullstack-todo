@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanLoad, Route, Router, UrlSegment, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { AuthService } from './auth/auth.service';
 import { Store } from '@ngrx/store';
 import { AuthSelectors } from '../store/auth/auth.selectors';
@@ -25,6 +25,12 @@ export class HomeGuard implements CanLoad {
     | UrlTree {
     this.authService.checkAuthentication();
 
-    return this.store.select(new AuthSelectors().selectUserSignedIn);
+    return this.store.select(new AuthSelectors().selectUserSignedIn).pipe(
+      tap(result => {
+        if (!result) {
+          this.router.navigateByUrl('/auth/login');
+        }
+      })
+    );
   }
 }

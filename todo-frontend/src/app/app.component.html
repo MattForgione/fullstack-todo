@@ -3,7 +3,7 @@
   [tabPanel]="tabPanel"
   backgroundColor="primary"
   mat-tab-nav-bar>
-  <ng-container *ngIf="signedIn; else notSignedIn">
+  <ng-container *ngIf="signedIn$ | async; else notSignedIn">
     <a
       mat-tab-link
       (click)="selectCurrentNav(routes.HOME)"
