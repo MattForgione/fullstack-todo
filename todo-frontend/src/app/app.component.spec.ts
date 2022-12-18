@@ -8,6 +8,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatCardModule } from '@angular/material/card';
+import { initialState } from '../test-utils';
 
 describe('AppComponent', () => {
   let loader: HarnessLoader;
@@ -15,19 +16,6 @@ describe('AppComponent', () => {
   let guard: HomeGuard;
   let store: MockStore;
   let fixture: ComponentFixture<AppComponent>;
-
-  const initialState = {
-    todos: {
-      todoLists: [],
-      currentlySelected: null,
-    },
-    app: {
-      currentNav: null,
-    },
-    auth: {
-      userSignedIn: false,
-    },
-  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

@@ -14,24 +14,12 @@ import { FormComponent } from '../../shared/form/form.component';
 import { MatCardTitle } from '@angular/material/card';
 import { InputComponent } from '../../shared/input/input.component';
 import { MatError, MatLabel } from '@angular/material/form-field';
+import { initialState } from '../../../test-utils';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let store: MockStore;
-
-  const initialState = {
-    todos: {
-      todoLists: [],
-      currentlySelected: null,
-    },
-    app: {
-      currentNav: null,
-    },
-    auth: {
-      userSignedIn: false,
-    },
-  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -49,8 +37,8 @@ describe('LoginComponent', () => {
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
     store = TestBed.inject(MockStore);
+    fixture.detectChanges();
   });
 
   afterEach(() => {
