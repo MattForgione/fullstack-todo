@@ -12,16 +12,20 @@ import { UsedToken } from './tokens/used-token.entity';
 import { TodoListModule } from './todo-list/todo-list.module';
 import { TodoList } from './todo-list/todo-list.entity';
 import { Todo } from './todo-list/todo.entity';
+import { LocalConfigService } from './local-config/local-config.service';
 
 @Module({
   imports: [
     UsersModule,
     AuthModule,
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'db.sqlite',
-      entities: [User, UsedToken, Todo, TodoList],
-      synchronize: true,
+    TypeOrmModule.forRootAsync({
+      inject: [LocalConfigService],
+      useFactory: (config: LocalConfigService) => ({
+        type: 'sqlite',
+        database: config.dbName(),
+        entities: [User, UsedToken, Todo, TodoList],
+        synchronize: true,
+      }),
     }),
     LocalConfigModule,
     UsedTokensModule,
