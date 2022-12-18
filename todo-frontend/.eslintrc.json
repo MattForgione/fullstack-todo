@@ -66,6 +66,20 @@
           }
         ]
       }
+    },
+    {
+      "files": ["*.spec.ts"],
+      "env": {
+        "jasmine": true
+      }
+    },
+    {
+      "files": [".cy.ts"],
+      "plugins": ["cypress"],
+      "extends": ["plugin:cypress/recommended"],
+      "env": {
+        "cypress/globals": true
+      }
     }
   ]
 }
