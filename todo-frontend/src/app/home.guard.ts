@@ -16,8 +16,8 @@ export class HomeGuard implements CanLoad {
   ) {}
 
   canLoad(
-    route: Route,
-    segments: UrlSegment[]
+    route?: Route,
+    segments?: UrlSegment[]
   ):
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
