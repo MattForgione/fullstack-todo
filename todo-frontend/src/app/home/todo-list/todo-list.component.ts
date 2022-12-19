@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { UserTodoList } from '../../../interfaces';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { TodoListsActions } from '../../../store/todo-lists/todo-lists.actions';
 
 @Component({
   selector: 'app-todo-list',
@@ -10,9 +12,12 @@ import { ActivatedRoute } from '@angular/router';
 export class TodoListComponent {
   todoList!: UserTodoList;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private store: Store) {
     this.route.data.subscribe(({ todos }) => {
       this.todoList = todos;
+      this.store.dispatch(
+        TodoListsActions.onSelectTodoList({ todoList: todos })
+      );
     });
   }
 

@@ -4,6 +4,7 @@ import { Observable, tap } from 'rxjs';
 import { AuthService } from './auth/auth.service';
 import { Store } from '@ngrx/store';
 import { AuthSelectors } from '../store/auth/auth.selectors';
+import { TodoListsActions } from '../store/todo-lists/todo-lists.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,8 @@ export class HomeGuard implements CanLoad {
       tap(result => {
         if (!result) {
           this.router.navigateByUrl('/auth/login');
+        } else {
+          this.store.dispatch(TodoListsActions.loadTodoLists());
         }
       })
     );

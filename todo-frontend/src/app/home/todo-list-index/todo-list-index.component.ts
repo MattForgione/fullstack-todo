@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserTodoList } from '../../../interfaces';
 import { TodoListService } from '../todo-list.service';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { TodoListsSelectors } from '../../../store/todo-lists/todo-lists.selecto
   templateUrl: './todo-list-index.component.html',
   styleUrls: ['./todo-list-index.component.scss'],
 })
-export class TodoListIndexComponent implements OnInit {
+export class TodoListIndexComponent {
   private selectors = new TodoListsSelectors();
   currentlySelected$ = this.store.select(
     this.selectors.selectCurrentlySelected
@@ -26,10 +26,6 @@ export class TodoListIndexComponent implements OnInit {
     private router: Router,
     private store: Store
   ) {}
-
-  ngOnInit() {
-    this.store.dispatch(TodoListsActions.loadTodoLists());
-  }
 
   onSelect(todoList: UserTodoList) {
     this.store.dispatch(TodoListsActions.onSelectTodoList({ todoList }));
