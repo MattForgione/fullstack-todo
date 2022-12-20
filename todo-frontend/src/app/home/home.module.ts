@@ -13,6 +13,8 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { DashboardPlaceholderComponent } from './dashboard-placeholder/dashboard-placeholder.component';
 import { TodoListNotFoundComponent } from './todo-list-not-found/todo-list-not-found.component';
 import { TodoListIndexComponent } from './todo-list-index/todo-list-index.component';
+import { CreateTodoListFormComponent } from './create-todo-list-form/create-todo-list-form.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { TodoListIndexComponent } from './todo-list-index/todo-list-index.compon
     DashboardPlaceholderComponent,
     TodoListNotFoundComponent,
     TodoListIndexComponent,
+    CreateTodoListFormComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +35,7 @@ import { TodoListIndexComponent } from './todo-list-index/todo-list-index.compon
     MatToolbarModule,
     MatExpansionModule,
     MatCardModule,
+    SharedModule,
   ],
 })
 export class HomeModule {}

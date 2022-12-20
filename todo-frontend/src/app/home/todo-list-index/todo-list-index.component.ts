@@ -6,6 +6,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { TodoListsActions } from '../../../store/todo-lists/todo-lists.actions';
 import { TodoListsSelectors } from '../../../store/todo-lists/todo-lists.selectors';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../shared/dialog/dialog.component';
+import { CreateTodoListFormComponent } from '../create-todo-list-form/create-todo-list-form.component';
 
 @Component({
   selector: 'app-todo-list-index',
@@ -24,7 +27,8 @@ export class TodoListIndexComponent {
   constructor(
     private todoListService: TodoListService,
     private router: Router,
-    private store: Store
+    private store: Store,
+    private dialog: MatDialog
   ) {}
 
   onSelect(todoList: UserTodoList) {
@@ -33,5 +37,16 @@ export class TodoListIndexComponent {
       this.selectors.selectCurrentlySelected
     );
     this.router.navigateByUrl(`todo-list/${todoList.id}`);
+  }
+
+  onCreateTodoList() {
+    const ref = this.dialog.open(DialogComponent, {
+      data: {
+        title: 'Create A New Todo List',
+        component: CreateTodoListFormComponent,
+      },
+    });
+
+    ref.componentInstance.standalone = false;
   }
 }

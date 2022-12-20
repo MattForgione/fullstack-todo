@@ -1,0 +1,11 @@
+<app-form
+  (submitEvent)="onSubmit()"
+  (cancelEvent)="onCancel()"
+  [isDialog]="true"
+  [form]="createTodoListForm"
+  buttonText="Create!">
+  <app-input
+    labelText="Todo List Title"
+    placeholder="My Awesome Title"
+    [control]="$any(createTodoListForm.get('title'))"></app-input>
+</app-form>
