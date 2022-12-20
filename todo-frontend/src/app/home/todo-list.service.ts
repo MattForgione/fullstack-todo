@@ -37,4 +37,10 @@ export class TodoListService {
       `${this.url}/todo-list/full-todo-list?todoListId=${id}`
     );
   }
+
+  deleteTodoList(todoListId: number) {
+    return this.http.delete<UserTodoList>(
+      `${this.url}/todo-list/${todoListId}`
+    );
+  }
 }

@@ -15,6 +15,8 @@ import { TodoListNotFoundComponent } from './todo-list-not-found/todo-list-not-f
 import { TodoListIndexComponent } from './todo-list-index/todo-list-index.component';
 import { CreateTodoListFormComponent } from './create-todo-list-form/create-todo-list-form.component';
 import { SharedModule } from '../shared/shared.module';
+import { DeleteTodoListPromptComponent } from './delete-todo-list-prompt/delete-todo-list-prompt.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { SharedModule } from '../shared/shared.module';
     TodoListNotFoundComponent,
     TodoListIndexComponent,
     CreateTodoListFormComponent,
+    DeleteTodoListPromptComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +39,7 @@ import { SharedModule } from '../shared/shared.module';
     MatExpansionModule,
     MatCardModule,
     SharedModule,
+    MatDialogModule,
   ],
 })
 export class HomeModule {}

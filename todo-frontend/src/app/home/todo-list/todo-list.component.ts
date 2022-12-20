@@ -3,6 +3,9 @@ import { UserTodoList } from '../../../interfaces';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TodoListsActions } from '../../../store/todo-lists/todo-lists.actions';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../shared/dialog/dialog.component';
+import { DeleteTodoListPromptComponent } from '../delete-todo-list-prompt/delete-todo-list-prompt.component';
 
 @Component({
   selector: 'app-todo-list',
@@ -12,7 +15,11 @@ import { TodoListsActions } from '../../../store/todo-lists/todo-lists.actions';
 export class TodoListComponent {
   todoList!: UserTodoList;
 
-  constructor(private route: ActivatedRoute, private store: Store) {
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store,
+    private dialog: MatDialog
+  ) {
     this.route.data.subscribe(({ todos }) => {
       this.todoList = todos;
       this.store.dispatch(
@@ -31,5 +38,17 @@ export class TodoListComponent {
 
   todoDeleteClicked(todoId: number) {
     console.log(`Todo delete clicked: ${todoId}`);
+  }
+
+  onDeleteTodoList() {
+    const ref = this.dialog.open(DialogComponent, {
+      data: {
+        title: 'Are you sure you want to delete this Todo List?',
+        component: DeleteTodoListPromptComponent,
+        todoListId: this.todoList.id,
+      },
+    });
+
+    ref.componentInstance.standalone = false;
   }
 }

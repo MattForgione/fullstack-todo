@@ -6,6 +6,7 @@ export interface DialogData {
   title: string;
   content: string;
   component: any;
+  todoListId: number;
 }
 
 @Component({

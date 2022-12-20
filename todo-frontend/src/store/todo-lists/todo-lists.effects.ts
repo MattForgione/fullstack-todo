@@ -32,6 +32,18 @@ export class TodoListsEffects {
     );
   });
 
+  deleteTodoList$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TodoListsActions.deleteTodoList),
+      switchMap(action => {
+        return this.todoListService.deleteTodoList(action.todoListId).pipe(
+          map(todoList => TodoListsActions.deleteTodoListSuccess({ todoList })),
+          catchError(() => of(TodoListsActions.deleteTodoListFailure))
+        );
+      })
+    );
+  });
+
   constructor(
     private actions$: Actions,
     private todoListService: TodoListService

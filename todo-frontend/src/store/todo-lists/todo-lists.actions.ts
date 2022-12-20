@@ -35,4 +35,18 @@ export class TodoListsActions {
   public static createTodoListFailure = createAction(
     '[Todos Api] Create Todo List Failure'
   );
+
+  public static deleteTodoList = createAction(
+    '[Todos Api] Delete Todo List',
+    props<{ todoListId: number }>()
+  );
+
+  public static deleteTodoListSuccess = createAction(
+    '[Todos Api] Delete Todo List Success',
+    props<{ todoList: UserTodoList }>()
+  );
+
+  public static deleteTodoListFailure = createAction(
+    '[Todos Api] Delete Todo List Failure'
+  );
 }

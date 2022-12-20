@@ -47,5 +47,12 @@ export const todoListReducer = createReducer(
     (state): TodoListsState => ({
       ...state,
     })
+  ),
+  on(
+    TodoListsActions.deleteTodoListSuccess,
+    (state, { todoList }): TodoListsState => ({
+      ...state,
+      todoLists: state.todoLists.filter(tl => tl !== todoList),
+    })
   )
 );
