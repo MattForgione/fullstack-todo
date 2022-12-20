@@ -17,7 +17,12 @@ export class TodoListService {
 
   async createTodoList(title: string, email: string) {
     const todoList = this.todoListRepository.create({ title });
-    todoList.user = await this.usersService.findOne(email);
+    const user = await this.usersService.findOne(email);
+
+    if (!user)
+      throw new NotFoundException('User not found when creating todo list');
+
+    todoList.user = user;
 
     return this.todoListRepository.save(todoList);
   }
