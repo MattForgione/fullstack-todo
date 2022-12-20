@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DialogComponent } from '../../shared/dialog/dialog.component';
+import { Store } from '@ngrx/store';
+import { TodoListsActions } from '../../../store/todo-lists/todo-lists.actions';
 
 @Component({
   selector: 'app-create-todo-list-form',
@@ -15,12 +17,13 @@ export class CreateTodoListFormComponent {
 
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<DialogComponent>
+    private dialogRef: MatDialogRef<DialogComponent>,
+    private store: Store
   ) {}
 
   async onSubmit() {
     const { title } = this.createTodoListForm.value as { title: string };
-    console.log(title);
+    this.store.dispatch(TodoListsActions.createTodoList({ title }));
     this.dialogRef.close();
   }
 

@@ -34,5 +34,18 @@ export const todoListReducer = createReducer(
       ...state,
       todoLists: todoLists,
     })
+  ),
+  on(
+    TodoListsActions.createTodoListSuccess,
+    (state, { todoList }): TodoListsState => ({
+      ...state,
+      todoLists: [...state.todoLists, todoList],
+    })
+  ),
+  on(
+    TodoListsActions.createTodoListFailure,
+    (state): TodoListsState => ({
+      ...state,
+    })
   )
 );

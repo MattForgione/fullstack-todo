@@ -20,6 +20,18 @@ export class TodoListsEffects {
     );
   });
 
+  createTodoList$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TodoListsActions.createTodoList),
+      switchMap(action => {
+        return this.todoListService.createTodoList(action.title).pipe(
+          map(todoList => TodoListsActions.createTodoListSuccess({ todoList })),
+          catchError(() => of(TodoListsActions.createTodoListFailure))
+        );
+      })
+    );
+  });
+
   constructor(
     private actions$: Actions,
     private todoListService: TodoListService

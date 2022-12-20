@@ -22,6 +22,16 @@ export class TodoListService {
     );
   }
 
+  createTodoList(title: string) {
+    const cookie = this.cookieService.get('authToken');
+    const { email } = jwt_decode(cookie) as DecodedJwtToken;
+
+    return this.http.post<UserTodoList>(`${this.url}/todo-list`, {
+      title,
+      email,
+    });
+  }
+
   getTodoList(id: number) {
     return this.http.get<UserTodoList>(
       `${this.url}/todo-list/full-todo-list?todoListId=${id}`

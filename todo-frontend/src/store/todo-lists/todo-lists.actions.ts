@@ -23,4 +23,16 @@ export class TodoListsActions {
   public static todosLoadedFailure = createAction(
     '[Todos Api] Todo Lists Loaded Failure'
   );
+
+  public static createTodoList = createAction(
+    '[Todos Api] Create Todo List',
+    props<{ title: string }>()
+  );
+  public static createTodoListSuccess = createAction(
+    '[Todos Api] Create Todo List Successful',
+    props<{ todoList: UserTodoList }>()
+  );
+  public static createTodoListFailure = createAction(
+    '[Todos Api] Create Todo List Failure'
+  );
 }
