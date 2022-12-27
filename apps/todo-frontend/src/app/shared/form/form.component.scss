@@ -1,0 +1,50 @@
+.page {
+  display: flex;
+  justify-content: center;
+}
+
+.form-shell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  &--title {
+    margin-bottom: 8px;
+  }
+}
+
+.response-error-container {
+  margin-bottom: 12px;
+  padding: 0;
+}
+
+.response-error-container:hover {
+  background: none;
+}
+
+.button-container {
+  padding: 0;
+  display: block;
+}
+
+.button {
+  width: auto;
+  max-width: 300px;
+  text-align: left;
+}
+
+.error-button {
+  padding: 8px;
+  white-space: pre-wrap;
+  line-height: 16px;
+}
+
+.reset-container {
+  margin-top: 15px;
+}
