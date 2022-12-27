@@ -8,13 +8,13 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class LoginAuthGuard extends AuthGuard('login') {
-  canActivate(
+  override canActivate(
     context: ExecutionContext
   ): boolean | Promise<boolean> | Observable<boolean> {
     return super.canActivate(context);
   }
 
-  handleRequest(err, user) {
+  override handleRequest(err: any, user: any) {
     if (err || !user) {
       throw (
         err || new UnauthorizedException('Error in login authorization guard')

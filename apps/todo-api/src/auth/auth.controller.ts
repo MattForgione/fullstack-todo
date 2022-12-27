@@ -37,7 +37,7 @@ export class AuthController {
   @UseGuards(LoginAuthGuard)
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  async login(@Request() req) {
+  async login(@Request() req: any) {
     return await this.authService.login(req.user);
   }
 
@@ -50,7 +50,7 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Get('user')
   @HttpCode(HttpStatus.OK)
-  async getProfile(@Request() req) {
+  async getProfile(@Request() req: any) {
     return req.user;
   }
 

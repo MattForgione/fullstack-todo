@@ -35,6 +35,6 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 # user defined
-db.sqlite
-test.sqlite
+../apps/todo-api/db.sqlite
+../apps/todo-api/test.sqlite
 .env.**

@@ -14,7 +14,7 @@ import { DecodedEmailJwt } from '../interfaces';
 export class UsersService {
   constructor(@InjectRepository(User) private repo: Repository<User>) {}
 
-  async findOne(email: string): Promise<User> {
+  async findOne(email: string): Promise<User | null> {
     const user = this.repo.findOneBy({ email });
     if (!user)
       throw new NotFoundException(`User with email ${email} was not found.`);

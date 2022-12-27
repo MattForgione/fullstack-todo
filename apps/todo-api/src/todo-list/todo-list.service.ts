@@ -30,11 +30,15 @@ export class TodoListService {
   async getTodoLists(email: string) {
     const user = await this.usersService.findOne(email);
 
-    return await this.todoListRepository
-      .createQueryBuilder('todoList')
-      .where('todoList.userId = :id', { id: user.id })
-      .leftJoinAndSelect('todoList.todos', 'todos')
-      .getMany();
+    if (user) {
+      return await this.todoListRepository
+        .createQueryBuilder('todoList')
+        .where('todoList.userId = :id', { id: user.id })
+        .leftJoinAndSelect('todoList.todos', 'todos')
+        .getMany();
+    }
+
+    return null;
   }
 
   async getTodoList(todoListId: number) {
@@ -74,7 +78,11 @@ export class TodoListService {
         `Todo list with id ${todoListId} was not found`
       );
 
-    return this.todoListRepository.remove(todoList);
+    if (todoList) {
+      return this.todoListRepository.remove(todoList);
+    }
+
+    return null;
   }
 
   async createTodo(title: string, content: string, todoListId: number) {
