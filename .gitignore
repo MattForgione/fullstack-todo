@@ -61,7 +61,5 @@ lerna-debug.log*
 .vscode/*
 
 # user defined
-../apps/todo-api/db.sqlite
-../apps/todo-api/test.sqlite
 .env.**
 *.sqlite
