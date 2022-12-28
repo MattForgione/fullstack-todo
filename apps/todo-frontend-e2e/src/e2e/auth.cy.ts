@@ -30,6 +30,7 @@ describe('Initial login using test database', () => {
 
   it('Brings you to dashboard when refresh after login', () => {
     login();
+    cy.wait(250);
     cy.reload();
     dashboardSignPost();
   });

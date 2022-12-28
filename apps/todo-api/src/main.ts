@@ -7,12 +7,16 @@ import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app.module';
+import { LocalConfigService } from './local-config/local-config.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const localConfig = app.get(LocalConfigService);
   app.enableCors();
+
   await app.listen(3000);
-  Logger.log(`🚀 Application is running on: http://localhost:${3000}`);
+  Logger.log(`[Todo Api] Application is running on: http://localhost:${3000}`);
+  Logger.log(`[Todo Api] Current env ${localConfig.devMode()}`);
 }
 
 bootstrap();

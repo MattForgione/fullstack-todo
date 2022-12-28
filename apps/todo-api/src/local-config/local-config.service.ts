@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 interface ILocalConfigService {
+  devMode(): string;
   apiUrl(): string;
   transportHost(): string;
   transportPort(): number;
@@ -20,6 +21,10 @@ export class LocalConfigService implements ILocalConfigService {
 
   private getToken(tokenName: string) {
     return this.configService.get(tokenName);
+  }
+
+  devMode(): string {
+    return this.getToken('DEV_MODE');
   }
 
   apiUrl(): string {

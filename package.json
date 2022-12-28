@@ -9,6 +9,7 @@
     "test": "nx test",
     "lint": "nx lint",
     "e2e": "nx e2e",
+    "nx-dev-serve": "env-cmd -f .env.testing nx serve",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "postinstall": "node decorate-angular-cli.js"
@@ -83,6 +84,7 @@
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
     "cypress": "latest",
+    "env-cmd": "^10.1.0",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.12.1",
