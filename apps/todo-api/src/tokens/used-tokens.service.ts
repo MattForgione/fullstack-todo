@@ -11,8 +11,6 @@ export class UsedTokensService {
 
   async checkIfTokenExists(token: string) {
     const tokenResult = await this.repo.findOneBy({ token });
-    console.log('token result: ' + token);
-    console.log('repo result: ' + tokenResult);
 
     if (!tokenResult) return { tokenExists: false };
     return { tokenExists: true };
