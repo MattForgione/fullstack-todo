@@ -9,15 +9,12 @@ import {
   Param,
   HttpCode,
   HttpStatus,
-  Query,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LoginAuthGuard } from './guards/login-auth.guard';
 import { PasswordResetDto } from './dto/password-reset.dto';
-import { StoredTokenDto } from './dto/stored-token.dto';
-import { UsedTokensService } from '../tokens/used-tokens.service';
 
 interface VerifyEmailToken {
   token: string;
@@ -29,10 +26,7 @@ interface ResetPasswordEmail {
 
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private authService: AuthService,
-    private usedTokenService: UsedTokensService
-  ) {}
+  constructor(private authService: AuthService) {}
 
   @UseGuards(LoginAuthGuard)
   @Post('login')
@@ -73,16 +67,5 @@ export class AuthController {
     @Body() body: PasswordResetDto
   ) {
     return this.authService.submitResetPasswordForm(token, body);
-  }
-
-  @Post('store-used-token')
-  @HttpCode(HttpStatus.CREATED)
-  async storeUsedToken(@Body() body: StoredTokenDto) {
-    return this.usedTokenService.addToken(body.token);
-  }
-
-  @Get('check-used-token-exists')
-  async checkIfTokenExists(@Query() query: { token: string }) {
-    return this.usedTokenService.checkIfTokenExists(query.token);
   }
 }

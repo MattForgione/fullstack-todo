@@ -95,13 +95,13 @@ export class AuthService {
 
   checkTokenExists(token: string) {
     return this.http.get<TokenExistsResponse>(
-      `${this.url}/auth/check-used-token-exists?token=${token}`
+      `${this.url}/tokens/check-used-token-exists?token=${token}`
     );
   }
 
   storeUsedToken(token: string) {
     return this.http.post<AddTokenResponse>(
-      `${this.url}/auth/store-used-token`,
+      `${this.url}/tokens/store-used-token`,
       {
         token,
       }
