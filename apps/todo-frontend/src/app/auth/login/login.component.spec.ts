@@ -8,11 +8,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedUiModule } from '@fullstack-todo/shared-ui';
 import { By } from '@angular/platform-browser';
-import { FormComponent } from '../../shared/form/form.component';
+import { FormComponent } from '@fullstack-todo/shared-ui';
 import { MatCardTitle } from '@angular/material/card';
-import { InputComponent } from '../../shared/input/input.component';
+import { InputComponent } from '@fullstack-todo/shared-ui';
 import { MatError, MatLabel } from '@angular/material/form-field';
 import { initialState } from '../../../test-utils';
 
@@ -29,7 +29,7 @@ describe('LoginComponent', () => {
         BrowserAnimationsModule,
         AuthModule,
         HttpClientModule,
-        SharedModule,
+        SharedUiModule,
       ],
       declarations: [LoginComponent],
       providers: [AuthService, provideMockStore({ initialState })],

@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InputComponent } from './input/input.component';
+import { DialogModule } from '@angular/cdk/dialog';
+import { FormComponent } from './form/form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { RouterLink } from '@angular/router';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { DialogComponent } from './dialog/dialog.component';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormComponent } from './form/form.component';
-import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { DialogComponent } from './dialog/dialog.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { RouterLink } from '@angular/router';
-import { DialogModule } from '@angular/cdk/dialog';
 
 @NgModule({
   declarations: [InputComponent, FormComponent, DialogComponent],
@@ -27,4 +27,4 @@ import { DialogModule } from '@angular/cdk/dialog';
     DialogModule,
   ],
 })
-export class SharedModule {}
+export class SharedUiModule {}

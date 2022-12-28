@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { TodoListsActions } from '../../../store/todo-lists/todo-lists.actions';
 import { TodoListsSelectors } from '../../../store/todo-lists/todo-lists.selectors';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../../shared/dialog/dialog.component';
+import { DialogComponent } from '@fullstack-todo/shared-ui';
 import { CreateTodoListFormComponent } from '../create-todo-list-form/create-todo-list-form.component';
 
 @Component({

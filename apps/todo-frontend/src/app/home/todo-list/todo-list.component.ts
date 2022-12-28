@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TodoListsActions } from '../../../store/todo-lists/todo-lists.actions';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../../shared/dialog/dialog.component';
+import { DialogComponent } from '@fullstack-todo/shared-ui';
 import { DeleteTodoListPromptComponent } from '../delete-todo-list-prompt/delete-todo-list-prompt.component';
 
 @Component({

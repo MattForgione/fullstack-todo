@@ -4,7 +4,7 @@ import { AuthService } from '../auth.service';
 import { finalize } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { DialogComponent } from '../../shared/dialog/dialog.component';
+import { DialogComponent } from '@fullstack-todo/shared-ui';
 
 @Component({
   selector: 'app-reset-password',

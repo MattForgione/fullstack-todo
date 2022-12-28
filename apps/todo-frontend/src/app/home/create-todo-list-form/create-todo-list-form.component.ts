@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { DialogComponent } from '../../shared/dialog/dialog.component';
+import { DialogComponent } from '@fullstack-todo/shared-ui';
 import { Store } from '@ngrx/store';
 import { TodoListsActions } from '../../../store/todo-lists/todo-lists.actions';
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatchPassword } from '../../shared/validators/match-password';
+import { MatchPassword } from '@fullstack-todo/shared-ui';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { CookieService } from 'ngx-cookie-service';

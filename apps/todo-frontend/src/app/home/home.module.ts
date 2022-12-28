@@ -14,7 +14,7 @@ import { DashboardPlaceholderComponent } from './dashboard-placeholder/dashboard
 import { TodoListNotFoundComponent } from './todo-list-not-found/todo-list-not-found.component';
 import { TodoListIndexComponent } from './todo-list-index/todo-list-index.component';
 import { CreateTodoListFormComponent } from './create-todo-list-form/create-todo-list-form.component';
-import { SharedModule } from '../shared/shared.module';
+import { SharedUiModule } from '@fullstack-todo/shared-ui';
 import { DeleteTodoListPromptComponent } from './delete-todo-list-prompt/delete-todo-list-prompt.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -38,7 +38,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatToolbarModule,
     MatExpansionModule,
     MatCardModule,
-    SharedModule,
+    SharedUiModule,
     MatDialogModule,
   ],
 })

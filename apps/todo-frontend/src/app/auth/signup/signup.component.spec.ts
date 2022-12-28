@@ -8,11 +8,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from '../auth.module';
 import { HttpClientModule } from '@angular/common/http';
-import { SharedModule } from '../../shared/shared.module';
+import {
+  SharedUiModule,
+  FormComponent,
+  InputComponent,
+} from '@fullstack-todo/shared-ui';
 import { By } from '@angular/platform-browser';
-import { FormComponent } from '../../shared/form/form.component';
 import { MatCardTitle } from '@angular/material/card';
-import { InputComponent } from '../../shared/input/input.component';
 import { MatError, MatLabel } from '@angular/material/form-field';
 
 describe('SignupComponent', () => {
@@ -28,7 +30,7 @@ describe('SignupComponent', () => {
         BrowserAnimationsModule,
         AuthModule,
         HttpClientModule,
-        SharedModule,
+        SharedUiModule,
       ],
       declarations: [SignupComponent],
       providers: [provideMockStore({ initialState })],

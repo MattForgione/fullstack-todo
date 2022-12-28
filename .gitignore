@@ -63,3 +63,5 @@ lerna-debug.log*
 # user defined
 .env.**
 *.sqlite
+
+.angular

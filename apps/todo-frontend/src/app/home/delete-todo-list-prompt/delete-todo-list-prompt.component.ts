@@ -1,9 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {
-  DialogComponent,
-  DialogData,
-} from '../../shared/dialog/dialog.component';
+import { DialogComponent, DialogData } from '@fullstack-todo/shared-ui';
 import { TodoListsActions } from '../../../store/todo-lists/todo-lists.actions';
 import { Store } from '@ngrx/store';
 

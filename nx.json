@@ -33,7 +33,8 @@
         "default",
         "^production",
         "{workspaceRoot}/karma.conf.js",
-        "{workspaceRoot}/jest.preset.js"
+        "{workspaceRoot}/jest.preset.js",
+        "{workspaceRoot}/karma.conf.js"
       ]
     },
     "lint": {
@@ -55,6 +56,19 @@
     },
     "@angular-eslint/schematics:library": {
       "setParserOptionsProject": true
+    },
+    "@nrwl/angular:application": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "karma",
+      "e2eTestRunner": "none"
+    },
+    "@nrwl/angular:library": {
+      "linter": "eslint",
+      "unitTestRunner": "karma"
+    },
+    "@nrwl/angular:component": {
+      "style": "css"
     }
   }
 }

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatchPassword } from '../../shared/validators/match-password';
+import { MatchPassword, DialogComponent } from '@fullstack-todo/shared-ui';
 import { AuthService } from '../auth.service';
 import { finalize } from 'rxjs';
-import { DialogComponent } from '../../shared/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';

@@ -13,7 +13,7 @@ export class FormComponent {
   @Input() buttonText = 'Go!';
   @Input() autocomplete?: string;
   @Input() login? = false;
-  @Input() isDialog: boolean = false;
+  @Input() isDialog = false;
   @Output() submitEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
 

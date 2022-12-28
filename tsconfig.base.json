@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "exclude": ["node_modules", "cypress.config.ts", "cypress", "tmp"],
   "compilerOptions": {
-    "baseUrl": "./todo-frontend",
+    "baseUrl": ".",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -21,7 +21,9 @@
     "lib": ["es2020", "dom"],
     "useDefineForClassFields": false,
     "types": ["jasmine", "node", "karma"],
-    "paths": {},
+    "paths": {
+      "@fullstack-todo/shared-ui": ["./libs/shared-ui/src/index.ts"]
+    },
     "rootDir": "."
   },
   "angularCompilerOptions": {
