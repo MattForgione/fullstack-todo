@@ -22,7 +22,7 @@ import { LocalConfigService } from './local-config/local-config.service';
       inject: [LocalConfigService],
       useFactory: (config: LocalConfigService) => ({
         type: 'sqlite',
-        database: config.dbName(),
+        database: config.dbName,
         entities: [User, UsedToken, Todo, TodoList],
         synchronize: true,
       }),

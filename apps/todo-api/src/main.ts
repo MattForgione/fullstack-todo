@@ -16,7 +16,7 @@ async function bootstrap() {
 
   await app.listen(3000);
   Logger.log(`[Todo Api] Application is running on: http://localhost:${3000}`);
-  Logger.log(`[Todo Api] Current env ${localConfig.devMode()}`);
+  Logger.log(`[Todo Api] Current env ${localConfig.devMode}`);
 }
 
 bootstrap();

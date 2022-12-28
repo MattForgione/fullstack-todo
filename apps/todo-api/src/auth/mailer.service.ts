@@ -7,12 +7,12 @@ import { LocalConfigService } from '../local-config/local-config.service';
 @Injectable()
 export class MailerService {
   private readonly _transporter: Transporter = nodemailer.createTransport({
-    host: this.localConfig.transportHost(),
-    port: this.localConfig.transportPort(),
+    host: this.localConfig.transportHost,
+    port: this.localConfig.transportPort,
     secure: false,
     auth: {
-      user: this.localConfig.emailUser(),
-      pass: this.localConfig.emailPass(),
+      user: this.localConfig.emailUser,
+      pass: this.localConfig.emailPass,
     },
   });
 
@@ -21,7 +21,7 @@ export class MailerService {
     private localConfig: LocalConfigService
   ) {}
 
-  private readonly _fromLineString = `${this.localConfig.emailFromUsername()} <${this.localConfig.emailFromEmail()}>`;
+  private readonly _fromLineString = `${this.localConfig.emailFromUsername} <${this.localConfig.emailFromEmail}>`;
 
   async sendVerificationEmail(email: string) {
     const payload = { email };
@@ -32,7 +32,7 @@ export class MailerService {
         from: this._fromLineString,
         to: email,
         subject: 'Verify your account',
-        html: `<a id="verification-link" href="${this.localConfig.clientUrl()}/auth/verify-email/${token}">Click here to verify!</a>`,
+        html: `<a id="verification-link" href="${this.localConfig.clientUrl}/auth/verify-email/${token}">Click here to verify!</a>`,
       });
     } catch (err) {
       throw new BadRequestException(`Something went wrong: ${err}`);
@@ -48,7 +48,7 @@ export class MailerService {
         from: this._fromLineString,
         to: email,
         subject: 'Password reset',
-        html: `<a href="${this.localConfig.clientUrl()}/auth/reset-password-form/${token}">Click here to reset password!!</a>`,
+        html: `<a href="${this.localConfig.clientUrl}/auth/reset-password-form/${token}">Click here to reset password!!</a>`,
       });
     } catch (err) {
       throw new BadRequestException(`Something went wrong: ${err}`);

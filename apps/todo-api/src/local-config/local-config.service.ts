@@ -2,17 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 interface ILocalConfigService {
-  devMode(): string;
-  apiUrl(): string;
-  transportHost(): string;
-  transportPort(): number;
-  emailUser(): string;
-  emailPass(): string;
-  emailFromUsername(): string;
-  emailFromEmail(): string;
-  jwtSecret(): string;
-  dbName(): string;
-  clientUrl(): string;
+  devMode: string;
+  apiUrl: string;
+  transportHost: string;
+  transportPort: number;
+  emailUser: string;
+  emailPass: string;
+  emailFromUsername: string;
+  emailFromEmail: string;
+  jwtSecret: string;
+  dbName: string;
+  clientUrl: string;
 }
 
 @Injectable()
@@ -23,47 +23,25 @@ export class LocalConfigService implements ILocalConfigService {
     return this.configService.get(tokenName);
   }
 
-  devMode(): string {
-    return this.getToken('DEV_MODE');
-  }
+  devMode: string = this.getToken('DEV_MODE');
 
-  apiUrl(): string {
-    return this.getToken('API_URL');
-  }
+  apiUrl: string = this.getToken('API_URL');
 
-  dbName(): string {
-    return this.getToken('DB_NAME');
-  }
+  dbName: string = this.getToken('DB_NAME');
 
-  emailFromEmail(): string {
-    return this.getToken('FROM_EMAIL');
-  }
+  emailFromEmail: string = this.getToken('FROM_EMAIL');
 
-  emailFromUsername(): string {
-    return this.getToken('FROM_USERNAME');
-  }
+  emailFromUsername: string = this.getToken('FROM_USERNAME');
 
-  emailPass(): string {
-    return this.getToken('EMAIL_PASS');
-  }
+  emailPass: string = this.getToken('EMAIL_PASS');
 
-  emailUser(): string {
-    return this.getToken('EMAIL_USER');
-  }
+  emailUser: string = this.getToken('EMAIL_USER');
 
-  jwtSecret(): string {
-    return this.getToken('JWT_SECRET');
-  }
+  jwtSecret: string = this.getToken('JWT_SECRET');
 
-  transportHost(): string {
-    return this.getToken('TRANSPORT_HOST');
-  }
+  transportHost: string = this.getToken('TRANSPORT_HOST');
 
-  transportPort(): number {
-    return this.getToken('TRANSPORT_PORT');
-  }
+  transportPort: number = this.getToken('TRANSPORT_PORT');
 
-  clientUrl(): string {
-    return this.getToken('CLIENT_URL');
-  }
+  clientUrl: string = this.getToken('CLIENT_URL');
 }

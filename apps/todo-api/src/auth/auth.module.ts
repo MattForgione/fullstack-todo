@@ -19,7 +19,7 @@ import { UsedTokensModule } from '../tokens/used-tokens.module';
     JwtModule.registerAsync({
       inject: [LocalConfigService],
       useFactory: (localConfig: LocalConfigService) => ({
-        secret: localConfig.jwtSecret(),
+        secret: localConfig.jwtSecret,
         signOptions: { expiresIn: '7d' },
       }),
     }),
