@@ -9,18 +9,19 @@ import {
 } from '@nestjs/common';
 import { StoredTokenDto } from '../auth/dto/stored-token.dto';
 import { UsedTokensService } from './used-tokens.service';
+import { Endpoints } from '@fullstack-todo/todo-interfaces';
 
-@Controller('tokens')
+@Controller()
 export class UsedTokensController {
   constructor(private usedTokenService: UsedTokensService) {}
 
-  @Post('store-used-token')
+  @Post(Endpoints.STORE_TOKEN)
   @HttpCode(HttpStatus.CREATED)
   async storeUsedToken(@Body() body: StoredTokenDto) {
     return this.usedTokenService.addToken(body.token);
   }
 
-  @Get('check-used-token-exists')
+  @Get(Endpoints.CHECK_TOKEN)
   async checkIfTokenExists(@Query() query: { token: string }) {
     return this.usedTokenService.checkIfTokenExists(query.token);
   }

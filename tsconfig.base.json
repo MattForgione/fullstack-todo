@@ -22,7 +22,8 @@
     "useDefineForClassFields": false,
     "types": ["jasmine", "node", "karma"],
     "paths": {
-      "@fullstack-todo/shared-ui": ["./libs/shared-ui/src/index.ts"]
+      "@fullstack-todo/shared-ui": ["./libs/shared-ui/src/index.ts"],
+      "@fullstack-todo/todo-interfaces": ["libs/todo-interfaces/src/index.ts"]
     },
     "rootDir": "."
   },
