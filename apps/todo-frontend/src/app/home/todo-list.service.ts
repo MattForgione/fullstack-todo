@@ -1,46 +1,25 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { DecodedJwtToken, UserTodoList } from '../../interfaces';
-import { environment } from '../../environments/environment';
-import { CookieService } from 'ngx-cookie-service';
-import jwt_decode from 'jwt-decode';
+import { ApiService } from '../api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoListService {
-  url = environment.apiUrl;
-
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  constructor(private apiService: ApiService) {}
 
   getUserTodoLists() {
-    const cookie = this.cookieService.get('authToken');
-    const decoded = jwt_decode(cookie) as DecodedJwtToken;
-
-    return this.http.get<UserTodoList[]>(
-      `${this.url}/todo-list?email=${decoded.email}`
-    );
+    return this.apiService.getUserTodoLists();
   }
 
   createTodoList(title: string) {
-    const cookie = this.cookieService.get('authToken');
-    const { email } = jwt_decode(cookie) as DecodedJwtToken;
-
-    return this.http.post<UserTodoList>(`${this.url}/todo-list`, {
-      title,
-      email,
-    });
+    return this.apiService.createTodoList(title);
   }
 
   getTodoList(id: number) {
-    return this.http.get<UserTodoList>(
-      `${this.url}/todo-list/full-todo-list?todoListId=${id}`
-    );
+    return this.apiService.getTodoList(id);
   }
 
   deleteTodoList(todoListId: number) {
-    return this.http.delete<UserTodoList>(
-      `${this.url}/todo-list/${todoListId}`
-    );
+    return this.apiService.deleteTodoList(todoListId);
   }
 }
