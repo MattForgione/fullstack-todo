@@ -7,7 +7,6 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { catchError, EMPTY, map, Observable } from 'rxjs';
-import { TodoListService } from './todo-list.service';
 import { Store } from '@ngrx/store';
 import { TodoListsSelectors } from '../../store/todo-lists/todo-lists.selectors';
 
@@ -19,11 +18,7 @@ export class TodoListResolverService
 {
   private selectors = new TodoListsSelectors();
 
-  constructor(
-    private todoListService: TodoListService,
-    private router: Router,
-    private store: Store
-  ) {}
+  constructor(private router: Router, private store: Store) {}
 
   resolve(
     route: ActivatedRouteSnapshot,

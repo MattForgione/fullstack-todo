@@ -7,14 +7,33 @@ import { DecodedJwtToken, UserTodoList } from '../interfaces';
 import jwt_decode from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
 
+/**
+ * Access token object with the jwt response in string form.
+ *
+ * @interface AccessTokenResponse
+ * @property {string} access_token
+ */
 interface AccessTokenResponse {
   access_token: string;
 }
 
+/**
+ * Token response object holding a flag for if the token exists or not.
+ *
+ * @interface TokenExistsResponse
+ * @property {boolean} tokenExists
+ */
 interface TokenExistsResponse {
   tokenExists: boolean;
 }
 
+/**
+ * Token response object holding the result of an add token call to api
+ *
+ * @interface AddTokenResponse
+ * @property {string} token
+ * @property {string} id
+ */
 interface AddTokenResponse {
   token: string;
   id: string;
@@ -44,7 +63,7 @@ export class ApiService implements IApiService {
 
   private zipUrl(endpoint: string, queryString?: string) {
     return queryString
-      ? `${this.url}/${endpoint}&${queryString}`
+      ? `${this.url}/${endpoint}?${queryString}`
       : `${this.url}/${endpoint}`;
   }
 

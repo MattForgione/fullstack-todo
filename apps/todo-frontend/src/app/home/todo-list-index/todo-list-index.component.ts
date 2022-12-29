@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { UserTodoList } from '../../../interfaces';
-import { TodoListService } from '../todo-list.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -25,7 +24,6 @@ export class TodoListIndexComponent {
   );
 
   constructor(
-    private todoListService: TodoListService,
     private router: Router,
     private store: Store,
     private dialog: MatDialog

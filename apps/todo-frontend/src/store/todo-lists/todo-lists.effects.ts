@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { TodoListService } from '../../app/home/todo-list.service';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { TodoListsActions } from './todo-lists.actions';
+import { ApiService } from '../../app/api.service';
 
 @Injectable()
 export class TodoListsEffects {
@@ -10,7 +10,7 @@ export class TodoListsEffects {
     return this.actions$.pipe(
       ofType(TodoListsActions.loadTodoLists),
       switchMap(() =>
-        this.todoListService.getUserTodoLists().pipe(
+        this.apiService.getUserTodoLists().pipe(
           map(todoLists => {
             return TodoListsActions.todosLoadedSuccess({ todoLists });
           }),
@@ -24,7 +24,7 @@ export class TodoListsEffects {
     return this.actions$.pipe(
       ofType(TodoListsActions.createTodoList),
       switchMap(action => {
-        return this.todoListService.createTodoList(action.title).pipe(
+        return this.apiService.createTodoList(action.title).pipe(
           map(todoList => TodoListsActions.createTodoListSuccess({ todoList })),
           catchError(() => of(TodoListsActions.createTodoListFailure))
         );
@@ -36,7 +36,7 @@ export class TodoListsEffects {
     return this.actions$.pipe(
       ofType(TodoListsActions.deleteTodoList),
       switchMap(action => {
-        return this.todoListService.deleteTodoList(action.todoListId).pipe(
+        return this.apiService.deleteTodoList(action.todoListId).pipe(
           map(todoList => TodoListsActions.deleteTodoListSuccess({ todoList })),
           catchError(() => of(TodoListsActions.deleteTodoListFailure))
         );
@@ -44,8 +44,5 @@ export class TodoListsEffects {
     );
   });
 
-  constructor(
-    private actions$: Actions,
-    private todoListService: TodoListService
-  ) {}
+  constructor(private actions$: Actions, private apiService: ApiService) {}
 }
