@@ -9,7 +9,7 @@
     "test": "nx test",
     "lint": "nx lint",
     "e2e": "nx e2e",
-    "nx-dev-serve": "env-cmd -f .env.testing nx serve",
+    "nx-test-serve": "env-cmd -f .env.testing nx serve",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "postinstall": "node decorate-angular-cli.js"
