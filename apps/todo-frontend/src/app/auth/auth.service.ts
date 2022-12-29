@@ -1,35 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import jwt_decode from 'jwt-decode';
 import { DecodedJwtToken } from '../../interfaces';
 import { Store } from '@ngrx/store';
 import { AuthSelectors } from '../../store/auth/auth.selectors';
 import { AuthActions } from '../../store/auth/auth.actions';
-
-interface AccessTokenResponse {
-  access_token: string;
-}
-
-interface TokenExistsResponse {
-  tokenExists: boolean;
-}
-
-interface AddTokenResponse {
-  token: string;
-  id: string;
-}
+import { ApiService } from '../api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  url = environment.apiUrl;
   signedIn$ = this.store.select(new AuthSelectors().selectUserSignedIn);
 
   constructor(
-    private http: HttpClient,
+    private apiService: ApiService,
     private cookieService: CookieService,
     private store: Store
   ) {}
@@ -53,10 +38,7 @@ export class AuthService {
   login(email: string, password: string) {
     this.store.dispatch(AuthActions.setUserSignedIn({ userSignedIn: true }));
 
-    return this.http.post<AccessTokenResponse>(`${this.url}/auth/login`, {
-      email,
-      password,
-    });
+    return this.apiService.login(email, password);
   }
 
   checkAuthentication() {
@@ -71,40 +53,26 @@ export class AuthService {
   }
 
   signup(email: string, password: string) {
-    return this.http.post(`${this.url}/auth/signup`, {
-      email,
-      password,
-    });
+    return this.apiService.signup(email, password);
   }
 
   verifyEmail(token: string | null) {
-    return this.http.post(`${this.url}/auth/verify-email`, { token });
+    return this.apiService.verifyEmail(token);
   }
 
   sendPasswordResetEmail(email: string) {
-    return this.http.post(`${this.url}/auth/password-reset`, {
-      email,
-    });
+    return this.apiService.sendPasswordResetEmail(email);
   }
 
   submitResetPasswordForm(password: string, token: string) {
-    return this.http.patch(`${this.url}/auth/reset-password-form/${token}`, {
-      password,
-    });
+    return this.apiService.submitResetPasswordForm(password, token);
   }
 
   checkTokenExists(token: string) {
-    return this.http.get<TokenExistsResponse>(
-      `${this.url}/tokens/check-used-token-exists?token=${token}`
-    );
+    return this.apiService.checkTokenExists(token);
   }
 
   storeUsedToken(token: string) {
-    return this.http.post<AddTokenResponse>(
-      `${this.url}/tokens/store-used-token`,
-      {
-        token,
-      }
-    );
+    return this.apiService.storeUsedToken(token);
   }
 }
