@@ -65,3 +65,4 @@ lerna-debug.log*
 *.sqlite
 
 .angular
+**/cypress.env.json

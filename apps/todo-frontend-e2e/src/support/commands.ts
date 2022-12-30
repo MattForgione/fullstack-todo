@@ -1,8 +1,7 @@
 import { MailSlurp } from 'mailslurp-client';
 import { mount } from 'cypress/angular';
 
-// TODO: move apiKey to its own .env file
-const apiKey = '';
+const apiKey = Cypress.env('mailslurp_key');
 const mailslurp = new MailSlurp({ apiKey });
 
 Cypress.Commands.add('createInbox', () => {

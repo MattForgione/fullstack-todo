@@ -7,6 +7,12 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"]
+    },
+    {
+      "files": ["*.json"],
+      "rules": {
+        "semi": "off"
+      }
     }
   ]
 }
