@@ -6,6 +6,7 @@ const webpackPreprocessor = require('@cypress/webpack-preprocessor');
 
 export default defineConfig({
   requestTimeout: 30000,
+  watchForFileChanges: false,
   e2e: {
     ...nxE2EPreset(__dirname),
     setupNodeEvents(on) {
