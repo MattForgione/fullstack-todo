@@ -8,6 +8,7 @@ declare global {
       mount: typeof mount;
       createInbox(): Promise<InboxDto>;
       waitForLatestEmail(inboxId: string | undefined): Promise<Email>;
+      loginFlow(email: string, password: string): void;
     }
   }
 }
