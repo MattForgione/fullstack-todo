@@ -9,7 +9,7 @@ function dashboardSignPost() {
 
 describe('Sign up flow with verification', () => {
   context('Account creation testing', () => {
-    it('can load the sign up form', () => {
+    it('can load the sign up form and create inbox', () => {
       cy.visit('/auth/signup');
       cy.contains('Sign Up');
 
@@ -46,21 +46,16 @@ describe('Sign up flow with verification', () => {
       dashboardSignPost();
     });
 
-    it('should be able to use the given credentials to login', () => {
-      cy.contains('Logout').click();
-      cy.get('mat-card-title').should('contain', 'Login');
-      cy.get('mat-label')
-        .contains('Email')
-        .click()
-        .type('supersecretemail@mail.com');
-      cy.get('mat-label').contains('Password').click().type('Testing12#');
-      cy.get('span').contains('Login!').click();
-      dashboardSignPost();
-    });
-
-    it('should upon re-visiting link bring you to the expiry page', () => {
+    it('should, upon re-visiting sign in link, bring you to the expiry page', () => {
       cy.visit(verifyEmailLink);
       cy.get('p').should('contain', 'That link has expired...');
+    });
+  });
+
+  context('Logging in using the verified account', () => {
+    it('should be able to use the given credentials to login', () => {
+      cy.loginFlow(emailAddress, password);
+      dashboardSignPost();
     });
   });
 
