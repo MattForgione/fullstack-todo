@@ -3,6 +3,10 @@ let inboxId: string;
 let emailAddress: string;
 let verifyEmailLink: string;
 
+function dashboardSignPost() {
+  return cy.get('h1.module-title--title').contains('Dashboard');
+}
+
 describe('Sign up flow with verification', () => {
   context('Account creation testing', () => {
     it('can load the sign up form', () => {
@@ -39,7 +43,7 @@ describe('Sign up flow with verification', () => {
 
     it('can visit the link and verify the email', () => {
       cy.visit(verifyEmailLink);
-      cy.get('h1.module-title--title').should('contain', 'Dashboard');
+      dashboardSignPost();
     });
 
     it('should be able to use the given credentials to login', () => {
@@ -51,12 +55,30 @@ describe('Sign up flow with verification', () => {
         .type('supersecretemail@mail.com');
       cy.get('mat-label').contains('Password').click().type('Testing12#');
       cy.get('span').contains('Login!').click();
-      cy.get('h1.module-title--title').should('contain', 'Dashboard');
+      dashboardSignPost();
     });
 
     it('should upon re-visiting link bring you to the expiry page', () => {
       cy.visit(verifyEmailLink);
       cy.get('p').should('contain', 'That link has expired...');
+    });
+  });
+
+  context('Authorization testing and refresh bugs', () => {
+    it('Brings you to dashboard when refresh after login', () => {
+      cy.loginFlow(emailAddress, password);
+      cy.wait(250);
+      cy.reload();
+      dashboardSignPost();
+    });
+
+    it('brings you to login page after login->logout->refresh', () => {
+      cy.loginFlow(emailAddress, password);
+      dashboardSignPost();
+      cy.contains('Logout').click();
+
+      cy.reload();
+      cy.get('mat-card-title').should('contain', 'Login');
     });
   });
 });
