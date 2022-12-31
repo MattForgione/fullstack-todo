@@ -15,7 +15,11 @@
       {{ todoList.title }}
     </p>
   </div>
-  <button (click)="onCreateTodoList()" mat-mini-fab color="primary">
+  <button
+    id="create-todo-list"
+    (click)="onCreateTodoList()"
+    mat-mini-fab
+    color="primary">
     <mat-icon class="todo-icon">create</mat-icon>
   </button>
 </div>
