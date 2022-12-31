@@ -23,7 +23,7 @@ export const makeEmailAccount = async () => {
      */
     async getLastEmail() {
       let client = new ImapFlow({
-        host: 'ethereal.mail',
+        host: 'ethereal.email',
         port: 993,
         secure: true,
         auth: {
