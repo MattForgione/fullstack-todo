@@ -1,54 +1,64 @@
-const password = 'Testing12#';
-const passwordReset = 'Testing12#4';
-let inboxId: string;
+import { recurse } from 'cypress-recurse';
+
+let password = 'Testing12#';
+let passwordReset = 'Testing12#4';
+let passwordResetLink: string;
 let emailAddress: string;
 let verifyEmailLink: string;
-let passwordResetLink: string;
 
 function dashboardSignPost() {
   return cy.get('h1.module-title--title').contains('Dashboard');
 }
 
-describe('Sign up flow with verification', () => {
+describe('Sign up flow based tests using ethereal and nodemailer', () => {
   context('Account creation testing', () => {
-    it('can load the sign up form and create inbox', () => {
+    before(() => {
+      cy.task('getUserEmail').then((user: any) => {
+        cy.log(user.email);
+        cy.log(user.pass);
+        emailAddress = user.email;
+
+        expect(emailAddress).to.be.a('string');
+      });
+    });
+
+    it('can load the sign up form and find valid verification email', () => {
       cy.visit('/auth/signup');
       cy.contains('Sign Up');
 
-      cy.createInbox().then(inbox => {
-        assert.isDefined(inbox);
+      // signup with inbox email address and the password;
+      cy.get('mat-label').contains('Email').type(emailAddress);
+      cy.get('mat-label').contains('Password').type(password);
+      cy.get('mat-label').contains('Password Confirm').type(password);
+      cy.get('span').contains('Sign Up!').click();
 
-        // save the inboxId for later checking the emails
-        inboxId = inbox.id;
-        emailAddress = inbox.emailAddress;
-
-        // signup with inbox email address and the password;
-        cy.get('mat-label').contains('Email').type(emailAddress);
-        cy.get('mat-label').contains('Password').type(password);
-        cy.get('mat-label').contains('Password Confirm').type(password);
-        cy.get('span').contains('Sign Up!').click();
-      });
+      cy.wait(5000);
+      // email should exist
+      recurse(() => cy.task('getLastEmail'), Cypress._.isObject, {
+        timeout: 60000,
+        delay: 5000, // wait 5 seconds between attempts
+      })
+        .its('html')
+        .then((html: string | null) => {
+          if (html) {
+            verifyEmailLink = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/.exec(
+              html
+            )![2];
+            expect(verifyEmailLink).to.be.a('string');
+          } else {
+            throw new TypeError('HTML source is nullish');
+          }
+        });
     });
 
-    it('can receive the confirmation email and click the link', () => {
-      cy.waitForLatestEmail(inboxId).then(email => {
-        assert.isDefined(email);
-
-        const source = email.body as string;
-        // @ts-ignore
-        verifyEmailLink = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/.exec(
-          source
-        )[2];
-        assert.isString(verifyEmailLink);
-      });
-    });
-
-    it('can visit the link and verify the email', () => {
+    it('can visit the verification link and verify the email', () => {
       cy.visit(verifyEmailLink);
+      cy.wait(250);
+
       dashboardSignPost();
     });
 
-    it('should, upon re-visiting sign in link, bring you to the expiry page', () => {
+    it('upon revisiting the verification link, it should take you to the link expired page', () => {
       cy.visit(verifyEmailLink);
       cy.get('p').should('contain', 'That link has expired...');
     });
@@ -85,27 +95,36 @@ describe('Sign up flow with verification', () => {
       cy.get('a').contains('Click here to reset!').click();
       cy.get('mat-label').contains('Email').type(emailAddress);
       cy.get('span').contains('Send Email!').click();
+      cy.wait(5000);
     });
 
     it('should be able to visit the link, type in a new password, and submit, then log in', () => {
-      cy.waitForLatestEmail(inboxId).then(email => {
-        assert.isDefined(email);
+      // email should exist
+      recurse(() => cy.task('getLastEmail'), Cypress._.isObject, {
+        timeout: 60000,
+        delay: 5000, // wait 5 seconds between attempts
+      })
+        .its('html')
+        .then((html: string | null) => {
+          if (html) {
+            passwordResetLink = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/.exec(
+              html
+            )![2];
+            expect(passwordResetLink).to.be.a('string');
 
-        const source = email.body as string;
-        // @ts-ignore
-        passwordResetLink = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/.exec(
-          source
-        )[2];
-        assert.isString(passwordResetLink);
+            cy.visit(passwordResetLink);
+            cy.get('mat-label').contains('Password').type(passwordReset);
+            cy.get('mat-label')
+              .contains('Confirm Password')
+              .type(passwordReset);
+            cy.get('span').contains('Reset!').click();
 
-        cy.visit(passwordResetLink);
-        cy.get('mat-label').contains('Password').type(passwordReset);
-        cy.get('mat-label').contains('Confirm Password').type(passwordReset);
-        cy.get('span').contains('Reset!').click();
-
-        cy.loginFlow(emailAddress, passwordReset);
-        dashboardSignPost();
-      });
+            cy.loginFlow(emailAddress, passwordReset);
+            dashboardSignPost();
+          } else {
+            throw new TypeError('HTML source is nullish');
+          }
+        });
     });
   });
 });
