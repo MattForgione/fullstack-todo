@@ -9,17 +9,17 @@ function dashboardSignPost() {
 }
 
 describe('Sign up flow based tests using ethereal and nodemailer', () => {
-  before(() => {
-    cy.task('getUserEmail').then((user: any) => {
-      cy.log(user.email);
-      cy.log(user.pass);
-      emailAddress = user.email;
-
-      expect(emailAddress).to.be.a('string');
-    });
-  });
-
   context('Account creation testing', () => {
+    before(() => {
+      cy.task('getUserEmail').then((user: any) => {
+        cy.log(user.email);
+        cy.log(user.pass);
+        emailAddress = user.email;
+
+        expect(emailAddress).to.be.a('string');
+      });
+    });
+
     it('can load the sign up form and find valid verification email', () => {
       cy.visit('/auth/signup');
       cy.contains('Sign Up');
@@ -30,7 +30,7 @@ describe('Sign up flow based tests using ethereal and nodemailer', () => {
       cy.get('mat-label').contains('Password Confirm').type(password);
       cy.get('span').contains('Sign Up!').click();
 
-      // cy.wait(5000);
+      cy.wait(4000);
       // email should exist
       recurse(() => cy.task('getLastEmail'), Cypress._.isObject, {
         timeout: 60000,
@@ -42,7 +42,6 @@ describe('Sign up flow based tests using ethereal and nodemailer', () => {
             verifyEmailLink = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/.exec(
               html
             )![2];
-
             expect(verifyEmailLink).to.be.a('string');
           } else {
             throw new TypeError('HTML source is nullish');
@@ -52,7 +51,7 @@ describe('Sign up flow based tests using ethereal and nodemailer', () => {
 
     it('can visit the verification link and verify the email', () => {
       cy.visit(verifyEmailLink);
-      cy.wait(1000);
+      cy.wait(250);
 
       dashboardSignPost();
     });
